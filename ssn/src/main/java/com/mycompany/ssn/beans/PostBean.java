@@ -72,6 +72,34 @@ public class PostBean implements Serializable {
         return posts;
     }
 
+    public void addLike(User user, Post post) throws DoesNotExistException {
+        if (post == null) {
+            throw new DoesNotExistException("Post does not exist.");
+        }
+        if (user == null) {
+            throw new DoesNotExistException("User does not exist.");
+        }
+        post.addLike(user.getId());
+    }
+
+    public boolean postIsLikedByUser(User user, Post post) throws DoesNotExistException {
+        if (post == null) {
+            throw new DoesNotExistException("Post does not exist.");
+        }
+        if (user == null) {
+            throw new DoesNotExistException("User does not exist.");
+        }
+
+        boolean isLiked = false;
+        for (int userId : post.getLikes()) {
+            if (userId == user.getId()) {
+                isLiked = true;
+            }
+        }
+
+        return isLiked;
+    }
+
     public static Post showPost(int postId) {
         for (Post post : posts) {
             if (post.getId() == postId) {
