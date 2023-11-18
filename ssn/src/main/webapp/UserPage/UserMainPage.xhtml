@@ -32,9 +32,9 @@
 
                 <div class="column">
                     <ui:repeat value="#{postBean.getPosts()}" var="post">
+                        <h:form>
                         <h:commandLink class="box mx-3" style="cursor: pointer;"
-                                       outcome="/PostPage/PostPage.xhtml?faces-redirect=true"
-                                       action="#{postBean.setSelectedPost(postBean.setSelectedPost(post.id))}">
+                                       action="#{postBean.setSelectedPost(post.id)}">
                             <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
                             <br/>
                             <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
@@ -60,6 +60,7 @@
                                 </div>
                             </center>
                         </h:commandLink>
+                        </h:form>
                     </ui:repeat>
 
                 </div>

@@ -53,7 +53,7 @@ public class LoginBean implements Serializable {
     }
 
     public User getCurrentUser() {
-        return currentUser;
+        return currentUser; //dd
     }
 
     public void setPassword(String password) {

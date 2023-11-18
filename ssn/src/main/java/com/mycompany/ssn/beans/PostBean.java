@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author dimitriroulin
+ * @author jonathanstefanov
  */
 @Named(value = "postBean")
 @SessionScoped
@@ -28,6 +28,7 @@ public class PostBean implements Serializable {
     private Post selectedPost;
     // Liste pour stocker les publications
     private static List<Post> posts = new ArrayList<>(MockDatabase.getPosts());
+
 
     public static Post getPost(int id) {
         for (Post post : posts) {
