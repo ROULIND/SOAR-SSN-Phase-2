@@ -24,6 +24,8 @@ import java.util.List;
 @Named(value = "postBean")
 @SessionScoped
 public class PostBean implements Serializable {
+
+    private Post selectedPost;
     // Liste pour stocker les publications
     private static List<Post> posts = new ArrayList<>(MockDatabase.getPosts());
 
@@ -84,6 +86,17 @@ public class PostBean implements Serializable {
             strDisplay = strDisplay + post.toString();
         }
         return strDisplay;
+    }
+
+    public Post getSelectedPost() {
+        return selectedPost;
+    }
+
+    public String setSelectedPost(int postId) {
+        Post selectedPost = showPost(postId);
+        this.selectedPost = selectedPost;
+        return "/PostPage/PostPage.xhtml?faces-redirect=true";
+
     }
 
 

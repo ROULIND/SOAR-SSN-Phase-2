@@ -11,32 +11,60 @@
     <body>
         <div class="block">
             <p class="title has-text-centered">Posts</p>
+            <div class="columns">
+                <div class="column is-one-fifth">
+                <center>
+                    <div class="image is-128x128">
+                        <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                    </div>
+                    <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
+                    <!-- User Buttons -->
 
-            <ui:repeat value="#{postBean.getPosts()}" var="post">
-                <div class="box mx-3">
-                    <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
-                    <br/>
-                    <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
+                    <h:form>
+                        <h:commandButton value="Create Post" style="display: block;" styleClass="button my-1" />
+                        <h:commandButton value="Friends" style="display: block;" styleClass="button my-1" />
+                        <h:commandButton value="Options" style="display: block;" styleClass="button my-1" />
+                    </h:form>
 
-                    <br/>
-                    <h:outputText styleClass="is-size-4" value="#{post.text}" />
-                    <hr/>
-                    <div class="columns">
-                        <div class="column is-half small-padding">
-                            <span class="icon">
+
+                </center>
+                </div>
+
+                <div class="column">
+                    <ui:repeat value="#{postBean.getPosts()}" var="post">
+                        <h:commandLink class="box mx-3" style="cursor: pointer;"
+                                       outcome="/PostPage/PostPage.xhtml?faces-redirect=true"
+                                       action="#{postBean.setSelectedPost(postBean.setSelectedPost(post.id))}">
+                            <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
+                            <br/>
+                            <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
+
+                            <br/>
+                            <h:outputText styleClass="is-size-4" value="#{post.text}" />
+                            <hr/>
+                            <center>
+                                <div class="columns">
+                                    <div class="column is-half small-padding">
+                                        <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
+                                        <span class="icon">
                                 <i class="fas fa-heart"></i>
                               </span>
-                        </div>
-                        <div class="column is-half small-padding">
-                            <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
-                            <span class="icon">
+                                    </div>
+                                    <div class="column is-half small-padding">
+                                        <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
+                                        <span class="icon">
                                 <i class="fas fa-comment"></i>
                               </span>
-                        </div>
+                                    </div>
 
-                    </div>
+                                </div>
+                            </center>
+                        </h:commandLink>
+                    </ui:repeat>
+
                 </div>
-            </ui:repeat>
+
+            </div>
         </div>
     </body>
 </html>

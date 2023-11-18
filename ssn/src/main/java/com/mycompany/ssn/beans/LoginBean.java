@@ -52,6 +52,10 @@ public class LoginBean implements Serializable {
         this.currentUser = currentUser;
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

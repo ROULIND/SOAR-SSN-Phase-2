@@ -9,34 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div class="block">
-            <p class="title has-text-centered">Posts</p>
-
-            <ui:repeat value="#{postBean.getPosts()}" var="post">
-                <div class="box mx-3">
-                    <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
-                    <br/>
-                    <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
-
-                    <br/>
-                    <h:outputText styleClass="is-size-4" value="#{post.text}" />
-                    <hr/>
-                    <div class="columns">
-                        <div class="column is-half small-padding">
-                            <span class="icon">
-                                <i class="fas fa-heart"></i>
-                              </span>
-                        </div>
-                        <div class="column is-half small-padding">
-                            <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
-                            <span class="icon">
-                                <i class="fas fa-comment"></i>
-                              </span>
-                        </div>
-
-                    </div>
-                </div>
-            </ui:repeat>
-        </div>
+    <p>CACA</p>
     </body>
 </html>
