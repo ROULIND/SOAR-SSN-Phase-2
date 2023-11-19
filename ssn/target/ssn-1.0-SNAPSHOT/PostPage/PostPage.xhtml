@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>SSN Social Network</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+    <div class="box mx-3" style="cursor: pointer;">
+        <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(postBean.getSelectedPost().userId).getUsername()}" />
+        <br/>
+        <h:outputText styleClass="is-size-7" value="#{postBean.getSelectedPost().datePublished}" />
+
+        <br/>
+        <h:outputText styleClass="is-size-4" value="#{postBean.getSelectedPost().text}" />
+        <hr/>
+        <center>
+            <div class="columns">
+                <div class="column is-half small-padding">
+                    <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getLikes().size()}" />
+                    <span class="icon">
+                                <i class="fas fa-heart"></i>
+                              </span>
+                </div>
+                <div class="column is-half small-padding">
+                    <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getComments().size()}" />
+                    <span class="icon">
+                                <i class="fas fa-comment"></i>
+                              </span>
+                </div>
+
+            </div>
+        </center>
+    </div>
+
+
+    <!-- Make Comment  -->
+    <h:form styleClass="block m-3">
+        <h:inputTextarea class="textarea" placeholder="e.g. Hello world" value="#{commentBean.currentCommentText}"></h:inputTextarea>
+        <h:commandLink class="button is-primary mt-1"
+                       action="#{commentBean.makeComment(loginBean.currentUser, postBean.getSelectedPost())}"
+
+        >Post Comment</h:commandLink>
+    </h:form>
+
+    <!-- Show Comments -->
+    <ui:repeat value="#{postBean.getSelectedPost().comments}" var="comment">
+        <h:outputText styleClass="is-size-7" value="#{comment.text}" /><br/>
+
+    </ui:repeat>
+
+    </body>
+</html>
