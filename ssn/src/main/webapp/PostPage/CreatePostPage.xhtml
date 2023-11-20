@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <head>
+        <title>SSN Social Network</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+        <link rel="stylesheet" href="postpage.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <p class="title has-text-centered">Create Post</p>
+        <h:form styleClass="block m-3">
+            <h:inputTextarea class="textarea" placeholder="Write your post here" value="#{postBean.currentPostText}"></h:inputTextarea>
+            <h:commandLink class="button is-primary mt-1"
+                           action="#{postBean.createPost(loginBean.getCurrentUser())}"
+
+            >Post Comment</h:commandLink>
+        </h:form>
+
+
+    </body>
+
+
+</html>

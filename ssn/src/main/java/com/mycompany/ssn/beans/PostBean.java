@@ -24,6 +24,7 @@ import java.util.List;
 @Named(value = "postBean")
 @SessionScoped
 public class PostBean implements Serializable {
+    private String currentPostText = "";
 
     private Post selectedPost;
     // Liste pour stocker les publications
@@ -39,6 +40,14 @@ public class PostBean implements Serializable {
         return null;
     }
 
+    public void setCurrentPostText(String currentPostText) {
+        this.currentPostText = currentPostText;
+    }
+
+    public String getCurrentPostText() {
+        return currentPostText;
+    }
+
     public static ArrayList<Post> getPostsByUser(User user) {
         ArrayList<Post> postsByUser = new ArrayList<Post>();
         for (Post post : posts) {
@@ -50,7 +59,8 @@ public class PostBean implements Serializable {
     }
 
     // Méthode pour créer une nouvelle publication
-    public static void createPost(User user, String text) throws UserNotLoggedInException, UnauthorizedActionException, InvalidContentException {
+    public String createPost(User user) throws UserNotLoggedInException, UnauthorizedActionException, InvalidContentException {
+        String text = this.currentPostText;
         // Vérifier si l'utilisateur est connecté
         if (user == null) {
             throw new UserNotLoggedInException("User must be logged in to create a post.");
@@ -64,12 +74,42 @@ public class PostBean implements Serializable {
         // Créer une nouvelle publication et l'ajouter à la liste des publications
         Post post = new Post(generateUniqueId(), user.getId(), text, new Date());
         posts.add(post);
+
+        return "/UserPage/UserMainPage.xhtml?faces-redirect=true";
     }
 
     // Méthode pour obtenir la liste des publications
     public static List<Post> getPosts() {
         // TODO: reverse for GUI
         return posts;
+    }
+
+    public void addLike(User user, Post post) throws DoesNotExistException {
+        if (post == null) {
+            throw new DoesNotExistException("Post does not exist.");
+        }
+        if (user == null) {
+            throw new DoesNotExistException("User does not exist.");
+        }
+        post.addLike(user.getId());
+    }
+
+    public boolean postIsLikedByUser(User user, Post post) throws DoesNotExistException {
+        if (post == null) {
+            throw new DoesNotExistException("Post does not exist.");
+        }
+        if (user == null) {
+            throw new DoesNotExistException("User does not exist.");
+        }
+
+        boolean isLiked = false;
+        for (int userId : post.getLikes()) {
+            if (userId == user.getId()) {
+                isLiked = true;
+            }
+        }
+
+        return isLiked;
     }
 
     public static Post showPost(int postId) {
