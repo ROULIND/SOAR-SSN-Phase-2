@@ -185,7 +185,7 @@ p\:inputText {
 
 .main-content {
     margin-left: 20%; /* Adjust this value to match the fixed column width */
-    margin-top: 8%;
+    margin-top: 7%;
 }
 
 @media screen and (max-width: 768px) {

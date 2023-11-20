@@ -1,8 +1,6 @@
 package com.mycompany.ssn.beans;
 
 import com.mycompany.ssn.v1.Models.User;
-import com.mycompany.ssn.beans.LoginBean;
-import com.mycompany.ssn.beans.UserBean;
 import com.mycompany.ssn.v1.exceptions.DoesNotExistException;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -32,8 +30,10 @@ public class LoginBean implements Serializable {
         return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
-    public void userLogsout() {
+    public String userLogsout() {
         currentUser = null;
+
+        return "/ssn";
     }
 
     public User getUserLoggedIn() {

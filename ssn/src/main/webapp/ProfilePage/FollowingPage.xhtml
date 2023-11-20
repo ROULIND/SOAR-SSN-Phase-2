@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <title>SSN Social Network</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+    <link rel="stylesheet" href="../resources/css/postpage.css/css/postpage.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<center class="mx-2">
+    <h:form>
+        <h:link class="button" outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Go Back</span>
+        </h:link>
+    </h:form>
+    <h:outputText styleClass="title has-text-centered" value="#{userBean.selectedUser.username}'s user page" />
+    <br/>
+    <h:outputText styleClass="is-size-3 has-text-centered" value="#{userBean.selectedUser.followers.size()} followers" />
+    <br/>
+    <h:form>
+        <h:commandLink class="button" action="#{userBean.followUser(loginBean.currentUser, userBean.selectedUser)}">
+                <span class="icon">
+                    <i class="fas fa-bell"></i>
+                </span>
+            <span>Follow</span>
+        </h:commandLink>
+    </h:form>
+
+
+    <div class="block m-3">
+        <ui:repeat value="#{postBean.getPostsByUser(userBean.selectedUser)}" var="post">
+            <h:form>
+                <h:commandLink class="box mx-3" style="cursor: pointer;"
+                               action="#{postBean.setSelectedPost(post.id)}">
+                    <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
+                    <br/>
+                    <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
+                    <br/>
+                    <h:outputText styleClass="is-size-4" value="#{post.text}" />
+                    <hr/>
+                    <center>
+                        <div class="columns">
+                            <div class="column is-half small-padding">
+                                <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
+                                <span class="icon">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                            </div>
+                            <div class="column is-half small-padding">
+                                <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
+                                <span class="icon">
+                                                <i class="fas fa-comment"></i>
+                                            </span>
+                            </div>
+                        </div>
+                    </center>
+                </h:commandLink>
+            </h:form>
+        </ui:repeat>
+
+
+    </div>
+
+
+
+
+</center>
+
+
+
+</body>
+
+
+</html>

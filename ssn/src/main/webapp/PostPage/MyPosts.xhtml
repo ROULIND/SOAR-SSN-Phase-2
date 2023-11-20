@@ -1,27 +1,57 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
-<head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
     <title>SSN Social Network</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
-    <link rel="stylesheet" href="../resources/css/postpage.css/css/postpage.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <h:outputStylesheet name="css/UserPage.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-<body>
-<center class="mx-2">
-    <h:form>
-        <h:link class="button" outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true">
-            <span class="icon">
-                <i class="fas fa-arrow-left"></i>
-            </span>
-            <span>Go Back</span>
-        </h:link>
-    </h:form>
-<p class="title has-text-centered">My Posts</p>
-</center>
-<center>
+</h:head>
+<h:body>
+    <p class="title has-text-centered">My Posts</p>
+
+    <div class="columns">
+        <div class="column is-one-fifth fixed-column">
+            <center>
+                <div class="image is-128x128">
+                    <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                </div>
+                <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
+                <!-- User Buttons -->
+                <h:form>
+                    <p:button value="Home" icon="pi pi-home" styleClass="button" />
+                    <p:button value="Friends" icon="pi pi-users" styleClass="button" />
+                    <p:button value="My Posts" icon="pi pi-align-justify" styleClass="bbutton" />
+                    <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
+                              outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
+                </h:form>
+                <div class="menu-button-container">
+                    <h:form>
+                        <p:growl id="messages" showDetail="false"/>
+                        <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
+                        <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                            <p:submenu label="Your Profile">
+                                <p:menuitem value="Preferences" action="#{menuView.save}" update="messages" icon="pi pi-cog"/>
+                                <p:menuitem value="View your profile" action="#{menuView.update}" update="messages" icon="pi pi-user"/>
+                            </p:submenu>
+                            <p:submenu label="Your Activity">
+                                <p:menuitem value="your stats " action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-chart-line"/>
+                            </p:submenu>
+                            <p:submenu label="Logout">
+                                <p:menuitem value="Log-out" url="http://www.primefaces.org" icon="pi pi-sign-out"/>
+                                <p:menuitem value="Delete your account" icon="pi pi-trash"/>
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </div>
+            </center>
+        </div>
+
+
+    <div class="column main-content">
     <ui:repeat value="#{postBean.getPostsByUser(loginBean.currentUser)}" var="post">
         <h:form>
             <h:commandLink class="box mx-3" style="cursor: pointer;"
@@ -51,11 +81,9 @@
             </h:commandLink>
         </h:form>
     </ui:repeat>
-</center>
 
+    </div>
+    </div>
 
-
-</body>
-
-
+</h:body>
 </html>

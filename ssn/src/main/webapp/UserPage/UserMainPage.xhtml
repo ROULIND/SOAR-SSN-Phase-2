@@ -33,7 +33,7 @@
                         <!-- User Buttons -->
                         <h:form>
                             <p:commandButton value="Home" icon="pi pi-home" styleClass="bbutton" />
-                            <p:commandButton value="Friends" icon="pi pi-users" styleClass="button" />
+                            <p:commandButton value="Following" icon="pi pi-users" styleClass="button" />
                             <p:button value="My Posts" icon="pi pi-align-justify" styleClass="button"
                                                 outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
                             <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
@@ -45,15 +45,10 @@
                             <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
                             <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                                 <p:submenu label="Your Profile">
-                                    <p:menuitem value="Preferences" action="#{menuView.save}" update="messages" icon="pi pi-cog"/>
                                     <p:menuitem value="View your profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
                                 </p:submenu>
-                                <p:submenu label="Your Activity">
-                                    <p:menuitem value="your stats " action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-chart-line"/>
-                                </p:submenu>
                                 <p:submenu label="Logout">
-                                    <p:menuitem value="Log-out" url="http://www.primefaces.org" icon="pi pi-sign-out"/>
-                                    <p:menuitem value="Delete your account" icon="pi pi-trash"/>
+                                    <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
                                 </p:submenu>
                             </p:menu>
                         </h:form>
