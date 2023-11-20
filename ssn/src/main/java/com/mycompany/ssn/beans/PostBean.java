@@ -14,6 +14,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +59,10 @@ public class PostBean implements Serializable {
         return postsByUser;
     }
 
+    //TODO: change commandButton to Link
+    public String goToCreatePostPage() {
+        return "/PostPage/CreatePostPage.xhtml?faces-redirect=true";
+    }
     // Méthode pour créer une nouvelle publication
     public String createPost(User user) throws UserNotLoggedInException, UnauthorizedActionException, InvalidContentException {
         String text = this.currentPostText;
@@ -80,8 +85,13 @@ public class PostBean implements Serializable {
 
     // Méthode pour obtenir la liste des publications
     public static List<Post> getPosts() {
-        // TODO: reverse for GUI
-        return posts;
+        // Creating a new list from the original posts list
+        List<Post> reversedPosts = new ArrayList<>(posts);
+
+        // Reverse the new list
+        Collections.reverse(reversedPosts);
+
+        return reversedPosts;
     }
 
     public void addLike(User user, Post post) throws DoesNotExistException {

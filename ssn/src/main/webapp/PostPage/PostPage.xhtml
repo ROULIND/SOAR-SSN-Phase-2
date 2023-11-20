@@ -5,7 +5,7 @@
     <head>
         <title>SSN Social Network</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
-        <link rel="stylesheet" href="postpage.css"/>
+        <link rel="stylesheet" href="../resources/css/postpage.css/css/postpage.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -74,19 +74,7 @@
     </ui:repeat>
 
     <!-- Javacsript Comment Box toggle -->
-    <script type="text/javascript">
-        const commentBox = document.getElementById("commentBox");
-        commentBox.style.display = "none";
-
-        function toggleCommentBox() {
-            const commentBox = document.getElementById("commentBox");
-            if (commentBox.style.display === "none") {
-                commentBox.style.display = "block";
-            } else {
-                commentBox.style.display = "none";
-            }
-        }
-    </script>
+    <h:outputScript name="js/toggleCommentBox.js"/>
     <!-- Javascript Love button trigger / detector -->
     <script type="text/javascript">
     </script>
