@@ -22,8 +22,8 @@
 
 
 .logo-container img {
-    max-width: 80px; /* Adjust this value as needed */
-    max-height: 80px; /* Adjust this value as needed */
+    max-width: 50px; /* Adjust this value as needed */
+    max-height: 50px; /* Adjust this value as needed */
     height: auto; /* Maintain aspect ratio */}
 
 .logo-container {
@@ -185,6 +185,7 @@ p\:inputText {
 
 .main-content {
     margin-left: 20%; /* Adjust this value to match the fixed column width */
+    margin-top: 8%;
 }
 
 @media screen and (max-width: 768px) {

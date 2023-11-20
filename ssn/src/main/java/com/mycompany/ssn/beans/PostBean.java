@@ -56,6 +56,12 @@ public class PostBean implements Serializable {
                 postsByUser.add(post);
             }
         }
+
+        // Creating a new list from the original posts list
+        List<Post> reversedPosts = new ArrayList<>(postsByUser);
+
+        // Reverse the new list
+        Collections.reverse(reversedPosts);
         return postsByUser;
     }
 

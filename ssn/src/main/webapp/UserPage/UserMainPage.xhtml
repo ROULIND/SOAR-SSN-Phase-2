@@ -34,7 +34,8 @@
                         <h:form>
                             <p:commandButton value="Home" icon="pi pi-home" styleClass="bbutton" />
                             <p:commandButton value="Friends" icon="pi pi-users" styleClass="button" />
-                            <p:commandButton value="My Posts" icon="pi pi-align-justify" styleClass="button" />
+                            <p:button value="My Posts" icon="pi pi-align-justify" styleClass="button"
+                                                outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
                             <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
                                              outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
                         </h:form>
@@ -59,7 +60,7 @@
                     </div>
                     </center>
                 </div>
-                <div class="column main-content mt-5">
+                <div class="column main-content">
                     <ui:repeat value="#{postBean.getPosts()}" var="post">
                         <h:form>
                             <h:commandLink class="box mx-3" style="cursor: pointer;"
