@@ -32,8 +32,10 @@
                         <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
                         <!-- User Buttons -->
                         <h:form>
-                            <p:commandButton value="Home" icon="pi pi-home" styleClass="bbutton" />
-                            <p:commandButton value="Following" icon="pi pi-users" styleClass="button" />
+                            <p:button value="Home" icon="pi pi-home" styleClass="bbutton" />
+                            <p:button value="Following" icon="pi pi-users" styleClass="button"
+                                      outcome="/ProfilePage/FollowingPage.xhtml?faces-redirect=true"
+                            />
                             <p:button value="My Posts" icon="pi pi-align-justify" styleClass="button"
                                                 outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
                             <p:button value="Publish" icon="pi pi-pencil" styleClass="button"

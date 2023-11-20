@@ -86,6 +86,8 @@ public class PostBean implements Serializable {
         Post post = new Post(generateUniqueId(), user.getId(), text, new Date());
         posts.add(post);
 
+        this.currentPostText = "";
+
         return "/UserPage/UserMainPage.xhtml?faces-redirect=true";
     }
 

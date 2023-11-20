@@ -21,9 +21,14 @@
                 <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
                 <!-- User Buttons -->
                 <h:form>
-                    <p:commandButton value="Home" icon="pi pi-home" styleClass="button" />
-                    <p:commandButton value="Following" icon="pi pi-users" styleClass="button" />
-                    <p:button value="My Posts" icon="pi pi-align-justify" styleClass="button"
+                    <p:button value="Home" icon="pi pi-home" styleClass="button"
+                              outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true"
+
+                    />
+                    <p:button value="Following" icon="pi pi-users" styleClass="button"
+                              outcome="/ProfilePage/FollowingPage.xhtml?faces-redirect=true"
+                    />
+                    <p:button value="My Posts" icon="pi pi-align-justify" styleClass="bbutton"
                               outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
                     <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
                               outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
@@ -34,15 +39,10 @@
                         <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
                         <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                             <p:submenu label="Your Profile">
-                                <p:menuitem value="Preferences" action="#{menuView.save}" update="messages" icon="pi pi-cog"/>
                                 <p:menuitem value="View your profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
-                            </p:submenu>
-                            <p:submenu label="Your Activity">
-                                <p:menuitem value="your stats " action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-chart-line"/>
                             </p:submenu>
                             <p:submenu label="Logout">
                                 <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
-                                <p:menuitem value="Delete your account" icon="pi pi-trash"/>
                             </p:submenu>
                         </p:menu>
                     </h:form>
