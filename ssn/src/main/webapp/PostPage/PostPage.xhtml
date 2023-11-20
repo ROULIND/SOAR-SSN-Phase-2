@@ -20,7 +20,12 @@
             </h:link>
         </h:form>
     </center>    <div class="box mx-3" style="cursor: pointer;">
-        <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(postBean.getSelectedPost().userId).getUsername()}" />
+
+        <h:form>
+        <h:commandLink styleClass="is-size-5"
+                       action="#{userBean.goToProfilePage(userBean.getUserFromId(postBean.getSelectedPost().userId))}"
+                       value="#{userBean.getUserFromId(postBean.getSelectedPost().userId).getUsername()}" />
+        </h:form>
         <br/>
         <h:outputText styleClass="is-size-7" value="#{postBean.getSelectedPost().datePublished}" />
 

@@ -24,8 +24,22 @@ public class UserBean implements Serializable {
     private String lastName = "";
     private String email = "";
     private String password = "";
+
+    private User selectedUser;
+
+
     
-    
+    public void setSelectedUser(User user) {
+        this.selectedUser = user;
+    }
+    public User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public String goToProfilePage(User user) {
+        this.selectedUser = user;
+        return "/ProfilePage/ProfilePage.xhtml?faces-redirect=true";
+    }
     public void createAUser() {
         try {
             if (!emailExists() && !usernameExists()) {

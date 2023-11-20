@@ -46,7 +46,7 @@
                             <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                                 <p:submenu label="Your Profile">
                                     <p:menuitem value="Preferences" action="#{menuView.save}" update="messages" icon="pi pi-cog"/>
-                                    <p:menuitem value="View your profile" action="#{menuView.update}" update="messages" icon="pi pi-user"/>
+                                    <p:menuitem value="View your profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
                                 </p:submenu>
                                 <p:submenu label="Your Activity">
                                     <p:menuitem value="your stats " action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-chart-line"/>
