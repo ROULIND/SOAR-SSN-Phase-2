@@ -1,73 +1,250 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <head>
+    <h:head>
         <title>SSN Social Network</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <link rel="stylesheet" href="UserPage.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+        
+        <title>SSN Social Network</title>
+        <style>
+            .logo-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 30px;
+            }
+
+            .logo-container img {
+                max-width: 20%; /* Ajustez cette valeur pour modifier la taille du logo */
+            }
+
+            .header {
+                text-align: center;
+                background-color: black;
+                color: white;
+                padding: 10px 0;
+                /* autres styles pour le header si nécessaire */
+            }
+
+            .Mtitle {
+                color: whitesmoke;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: left;
+                padding: 30px 120px;
+                /* autres styles pour le titre si nécessaire */
+            }
+            .title {
+                color: black;
+                font-size: 28px;
+                padding: 10px 0;
+                
+                /* autres styles pour le titre si nécessaire */
+            }
+            .form-center {
+                text-align: center; /* Aligner le texte à droite */
+            }
+            /* Style de base pour les éléments de menu */
+            .button {
+                border: none; /* Aucune bordure */
+                background-color: white; /* Couleur de fond initiale */
+                display: block; /* Affiche les boutons en bloc */
+                margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+                transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+                padding: 10px 20px; /* Rembourrage pour augmenter la zone cliquable */
+                text-align: center; /* Centre le texte dans le bouton */
+                margin-top: 10px;
+                border-radius: 20px;
+                width: 150px; /* Largeur du bouton */
+                height: 52px; /* Hauteur du bouton */
+                font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+
+            }
+
+            /* Style pour l'effet de survol */
+            .button:hover {
+                background-color: #d0d0d0; /* Couleur de fond plus foncée lors du survol */
+            }
+            
+            .ibutton {
+                border: none; /* Aucune bordure */
+                color: whitesmoke;
+                background-color: #009BF0; /* Couleur de fond initiale */
+                display: block; /* Affiche les boutons en bloc */
+                margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+                transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+                padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+                text-align: center; /* Centre le texte dans le bouton */
+                margin-top: 100px;
+                border-radius: 30px;
+                width: 150px; /* Largeur du bouton */
+                height: 52px; /* Hauteur du bouton */
+                font-size: 22px; /* Taille du texte à l'intérieur du bouton */
+                font-weight: bold
+                
+                
+                
+            }
+
+            /* Style pour l'effet de survol */
+            .ibutton:hover {
+                background-color: #1986CF; /* Couleur de fond plus foncée lors du survol */
+            }
+            
+            .column {
+                margin-top: 50px;
+            }
+            .ui-button.button {
+                border: none; /* Aucune bordure */
+                color: black;
+                background-color: white; /* Couleur de fond initiale */
+                display: flex; /* Affiche les boutons en bloc */
+                margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+                transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+                padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+                text-align: center; /* Centre le texte dans le bouton */
+                line-height: 52px; /* Centrage vertical du texte */
+                width: 150px; /* Largeur du bouton */
+                height: 52px; /* Hauteur du bouton */
+                font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+                font-weight: bold;
+                margin-top: 10px;
+                border-radius: 30px;
+}
+            .ui-button.button:hover {
+                background-color: lightgray; /* Couleur de fond plus foncée lors du survol */
+            }
+            
+            .ui-button.bbutton {
+                border: none; /* Aucune bordure */
+                color: white;
+                background-color: #009BF0; /* Couleur de fond initiale */
+                display: flex; /* Affiche les boutons en bloc */
+                margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+                transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+                padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+                text-align: center; /* Centre le texte dans le bouton */
+                line-height: 52px; /* Centrage vertical du texte */
+                width: 150px; /* Largeur du bouton */
+                height: 52px; /* Hauteur du bouton */
+                font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+                font-weight: bold;
+                margin-top: 10px;
+                border-radius: 30px;
+                align-items: center;
+}
+            .ui-button.bbutton:hover {
+                background-color:  #1986CF; /* Couleur de fond plus foncée lors du survol */
+
+            .search-column h:form {
+                width: 50%; /* Ajustez la largeur selon vos besoins */
+                margin: auto;
+            }
+
+            .search-button {
+                background-color: gray; /* Couleur de fond du bouton */
+                border: none; /* Aucune bordure */
+                color: white; /* Couleur du texte */
+                height: 38px; /* Ajustez la hauteur pour l'aligner avec la barre de recherche */
+                border-radius: 30px; /* Bouton carré pour s'aligner avec la barre de recherche */
+                box-shadow: none; /* Pas d'ombre */
+            }
+
+            p\:inputText {
+                border-radius: 30px; /* Bordure carrée pour la barre de recherche */
+                /* autres styles pour la barre de recherche */
+            }
+
+
+           
+        </style>
+    </h:head>
+    <h:body>
+        <div class="logo-container">
+            <img src="https://sb.pandasoft.at/public/img/pandalogo.png" alt="Logo SSN Social Network" />
+        </div>
+        <div class="header">
+            <h1 class="Mtitle">SSN Social Network</h1>
+        </div>
         <div class="block">
-            <p class="title has-text-centered">Posts</p>
             <div class="columns">
                 <div class="column is-one-fifth">
-                <center>
-                    <div class="image is-128x128">
-                        <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                    <center>
+                        <div class="image is-128x128">
+                            <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                        </div>
+                        <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
+                        <!-- User Buttons -->
+                        <h:form>
+                            <p:commandButton value="Home" icon="pi pi-home" styleClass="button" />
+                            <p:commandButton value="Friends" icon="pi pi-users" styleClass="button" />
+                            <p:commandButton value="My Posts" icon="pi pi-align-justify" styleClass="button" />
+                            <p:commandButton value="Publish" icon="pi pi-pencil" styleClass="bbutton" />
+                        </h:form>
+                        <div class="menu-button-container">
+                        <h:form>
+                            <p:growl id="messages" showDetail="false"/>
+                            <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
+                            <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                                <p:submenu label="Your Profile">
+                                    <p:menuitem value="Preferences" action="#{menuView.save}" update="messages" icon="pi pi-cog"/>
+                                    <p:menuitem value="View your profile" action="#{menuView.update}" update="messages" icon="pi pi-user"/>
+                                </p:submenu>
+                                <p:submenu label="Your Activity">
+                                    <p:menuitem value="your stats " action="#{menuView.delete}" update="messages" ajax="false" icon="pi pi-chart-line"/>
+                                </p:submenu>
+                                <p:submenu label="Logout">
+                                    <p:menuitem value="Log-out" url="http://www.primefaces.org" icon="pi pi-sign-out"/>
+                                    <p:menuitem value="Delete your account" icon="pi pi-trash"/>
+                                </p:submenu>
+                            </p:menu>
+                        </h:form>
                     </div>
-                    <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
-                    <!-- User Buttons -->
-
-                    <h:form>
-                        <center>
-                        <h:link outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true"  value="Create Post" style="display: block;" styleClass="button my-1" />
-                        <h:link value="Friends" style="display: block;" styleClass="button my-1" />
-                        <h:link value="Options" style="display: block;" styleClass="button my-1" />
-                        </center>
-                    </h:form>
-
-
-                </center>
+                    </center>
                 </div>
-
                 <div class="column">
                     <ui:repeat value="#{postBean.getPosts()}" var="post">
                         <h:form>
-                        <h:commandLink class="box mx-3" style="cursor: pointer;"
-                                       action="#{postBean.setSelectedPost(post.id)}">
-                            <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
-                            <br/>
-                            <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
-
-                            <br/>
-                            <h:outputText styleClass="is-size-4" value="#{post.text}" />
-                            <hr/>
-                            <center>
-                                <div class="columns">
-                                    <div class="column is-half small-padding">
-                                        <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
-                                        <span class="icon">
-                                <i class="fas fa-heart"></i>
-                              </span>
+                            <h:commandLink class="box mx-3" style="cursor: pointer;"
+                                           action="#{postBean.setSelectedPost(post.id)}">
+                                <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
+                                <br/>
+                                <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
+                                <br/>
+                                <h:outputText styleClass="is-size-4" value="#{post.text}" />
+                                <hr/>
+                                <center>
+                                    <div class="columns">
+                                        <div class="column is-half small-padding">
+                                            <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
+                                            <span class="icon">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </div>
+                                        <div class="column is-half small-padding">
+                                            <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
+                                            <span class="icon">
+                                                <i class="fas fa-comment"></i>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="column is-half small-padding">
-                                        <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
-                                        <span class="icon">
-                                <i class="fas fa-comment"></i>
-                              </span>
-                                    </div>
-
-                                </div>
-                            </center>
-                        </h:commandLink>
+                                </center>
+                            </h:commandLink>
                         </h:form>
                     </ui:repeat>
-
                 </div>
-
+                <div class="column is-one-third search-column">
+                    <h:form style="display: flex;">
+                        <p:inputText id="searchField" placeholder="Recherche..." style="flex-grow: 1;"/>
+                        <p:commandButton value="Chercher" action="#{searchBean.search()}" icon="pi pi-search" styleClass="search-button"/>
+                    </h:form>
+                </div>
             </div>
         </div>
-    </body>
+    </h:body>
 </html>

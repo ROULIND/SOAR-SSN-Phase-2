@@ -1,4 +1,22 @@
 .verticalLine {
     border-left: thick solid #ff0000;
 }
+.white-text {
+    color: white;
+}
+.centered-image {
+    display: block; /* Pour centrer l'image horizontalement */
+    margin: 0 auto; /* Pour centrer l'image horizontalement */
+    max-width: 10%; /* Pour définir la largeur maximale de l'image */
+    text-align: center; /* Pour centrer le texte autour de l'image */
+    
+}.logo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
 
+.logo-container img {
+    max-width: 20%; /* Ajustez cette valeur pour modifier la taille du logo */
+}
