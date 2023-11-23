@@ -4,29 +4,71 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
         <title>SOAR Shop</title>
     </h:head>
     <h:body>
-        <h:outputLabel class="title has-text-centered" value="Welcome to SSN Social Network"/>
-        <br/>
-        <br/>
-        <h:form>
-            <h:panelGrid columns="1">
-                <h:link value="Login" outcome="LoginPage.xhtml?faces-redirect=true" />
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputText value="Username"/>
-                        <h:inputText value="#{loginBean.username}" />
-                        <h:outputText value="Password"/>
-                        <h:inputSecret value="#{loginBean.password}" />
-                        <br/>
-                        <h:commandButton value="Login" action="#{loginBean.userLogsIn()}"/>
-                        <br/>
-                    </h:panelGrid>
-                </h:form>
-                <h:link value="Create a New User Account" outcome="CreateUserPage.xhtml?faces-redirect=true" />
-                <h:link value="See Products in The Store" outcome="SeeStore.xhtml?faces-redirect=true" />
-            </h:panelGrid>
-        </h:form>
+        <div class="columns">
+            <div class="column">
+                <h:graphicImage
+                    value='https://images.unsplash.com/photo-1586500036065-bdaeac7a4feb?q=80&amp;w=3088&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                />
+
+            </div>
+            <div class="column">
+            <p class="title has-text-centered">Simple Social Network</p>
+            <h:form>
+                    <h:form>
+                        <center>
+                            <p class="is-size-5">Login</p>
+
+                            <div class="box">
+                                <h:panelGrid columns="1">
+
+                                    <!-- Username field -->
+                                    <div class="field">
+                                        <p class="control">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-user"></i> <!-- Adjust icon as needed -->
+                                            </span>
+                                            <h:inputText value="#{loginBean.username}" styleClass="input" type="text" placeholder="Username"/>
+                                        </p>
+                                    </div>
+
+                                    <!-- Password field -->
+                                    <div class="field">
+                                        <p class="control">
+                                           <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                            <h:inputSecret value="#{loginBean.password}" styleClass="input" placeholder="Password"/>
+
+                                        </p>
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <div class="field">
+                                        <p class="control">
+                                            <h:commandButton styleClass="button is-primary mt-2" value="Login" action="#{loginBean.userLogsIn()}"/>
+                                        </p>
+                                    </div>
+
+                                </h:panelGrid>
+                            </div>
+                        </center>
+                    </h:form>
+
+                    <center>
+                        <h:link value="Create a New User Account" outcome="CreateUserPage.xhtml?faces-redirect=true" />
+                    </center>
+            </h:form>
+
+            </div>
+
+        </div>
+
     </h:body>
+
+
 </html>
