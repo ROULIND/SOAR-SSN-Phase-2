@@ -1,0 +1,204 @@
+.verticalLine {
+    border-left: thick solid #ff0000;
+}
+.white-text {
+    color: white;
+}
+.centered-image {
+    display: block; /* Pour centrer l'image horizontalement */
+    margin: 0 auto; /* Pour centrer l'image horizontalement */
+    max-width: 10%; /* Pour définir la largeur maximale de l'image */
+    text-align: center; /* Pour centrer le texte autour de l'image */
+    
+}.logo-container {
+     display: flex;        /* Enable flexbox */
+     justify-content: center; /* Center horizontally */
+     align-items: center;  /* Center vertically if needed */
+     top: 0;
+     left: 0;
+     width: 100%;          /* Ensure the container spans the full width */
+     padding: 10px;
+ }
+
+
+.logo-container img {
+    max-width: 50px; /* Adjust this value as needed */
+    max-height: 50px; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */}
+
+.logo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px;
+}
+
+.logo-container img {
+    max-width: 20%; /* Ajustez cette valeur pour modifier la taille du logo */
+}
+
+.header {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    /* autres styles pour le header si nécessaire */
+}
+
+.Mtitle {
+    color: whitesmoke;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    padding: 30px 120px;
+    /* autres styles pour le titre si nécessaire */
+}
+.title {
+    color: black;
+    font-size: 28px;
+    padding: 10px 0;
+
+    /* autres styles pour le titre si nécessaire */
+}
+.form-center {
+    text-align: center; /* Aligner le texte à droite */
+}
+/* Style de base pour les éléments de menu */
+.button {
+    border: none; /* Aucune bordure */
+    background-color: white; /* Couleur de fond initiale */
+    display: block; /* Affiche les boutons en bloc */
+    margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+    transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+    padding: 10px 20px; /* Rembourrage pour augmenter la zone cliquable */
+    text-align: center; /* Centre le texte dans le bouton */
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 160px; /* Largeur du bouton */
+    height: 52px; /* Hauteur du bouton */
+    font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+
+}
+
+/* Style pour l'effet de survol */
+.button:hover {
+    background-color: #d0d0d0; /* Couleur de fond plus foncée lors du survol */
+}
+
+.ibutton {
+    border: none; /* Aucune bordure */
+    color: whitesmoke;
+    background-color: #009BF0; /* Couleur de fond initiale */
+    display: block; /* Affiche les boutons en bloc */
+    margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+    transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+    padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+    text-align: center; /* Centre le texte dans le bouton */
+    margin-top: 100px;
+    border-radius: 30px;
+    width: 150px; /* Largeur du bouton */
+    height: 52px; /* Hauteur du bouton */
+    font-size: 22px; /* Taille du texte à l'intérieur du bouton */
+    font-weight: bold
+
+
+
+}
+
+/* Style pour l'effet de survol */
+.ibutton:hover {
+    background-color: #1986CF; /* Couleur de fond plus foncée lors du survol */
+}
+
+.column {
+    margin-top: 50px;
+}
+.ui-button.button {
+    border: none; /* Aucune bordure */
+    color: black;
+    background-color: white; /* Couleur de fond initiale */
+    display: flex; /* Affiche les boutons en bloc */
+    margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+    transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+    padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+    text-align: center; /* Centre le texte dans le bouton */
+    line-height: 52px; /* Centrage vertical du texte */
+    width: 150px; /* Largeur du bouton */
+    height: 52px; /* Hauteur du bouton */
+    font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 30px;
+}
+.ui-button.button:hover {
+    background-color: lightgray; /* Couleur de fond plus foncée lors du survol */
+}
+
+.ui-button.bbutton {
+    border: none; /* Aucune bordure */
+    color: white;
+    background-color: #009BF0; /* Couleur de fond initiale */
+    display: flex; /* Affiche les boutons en bloc */
+    margin-bottom: 1rem; /* Espacement en bas de chaque bouton */
+    transition: background-color 0.3s; /* Transition douce pour l'effet de survol */
+    padding: 10px; /* Rembourrage pour augmenter la zone cliquable */
+    text-align: center; /* Centre le texte dans le bouton */
+    line-height: 52px; /* Centrage vertical du texte */
+    width: 150px; /* Largeur du bouton */
+    height: 52px; /* Hauteur du bouton */
+    font-size: 20px; /* Taille du texte à l'intérieur du bouton */
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 30px;
+    align-items: center;
+}
+.ui-button.bbutton:hover {
+    background-color: #1986CF; /* Couleur de fond plus foncée lors du survol */
+
+}
+.search-column form {
+    width: 50%; /* Ajustez la largeur selon vos besoins */
+    margin: auto;
+}
+
+.search-button {
+    background-color: gray; /* Couleur de fond du bouton */
+    border: none; /* Aucune bordure */
+    color: white; /* Couleur du texte */
+    height: 38px; /* Ajustez la hauteur pour l'aligner avec la barre de recherche */
+    border-radius: 30px; /* Bouton carré pour s'aligner avec la barre de recherche */
+    box-shadow: none; /* Pas d'ombre */
+}
+
+p\:inputText {
+    border-radius: 30px; /* Bordure carrée pour la barre de recherche */
+    /* autres styles pour la barre de recherche */
+}
+
+
+.fixed-column {
+    position: fixed;
+    top: 0; /* Adjust as needed */
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enable scrolling inside the column if content is long */
+}
+
+.main-content {
+    margin-left: 20%; /* Adjust this value to match the fixed column width */
+    margin-top: 7%;
+}
+
+@media screen and (max-width: 768px) {
+    .fixed-column {
+        position: static;
+        height: auto;
+        overflow-y: visible;
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+        <title>SOAR Shop</title>
+    </h:head>
+    <h:body>
+        <h:outputLabel class="title has-text-centered" value="Welcome to SSN Social Network"/>
+        <br/>
+        <br/>
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:link value="Login" outcome="LoginPage.xhtml?faces-redirect=true" />
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Username"/>
+                        <h:inputText value="#{loginBean.username}" />
+                        <h:outputText value="Password"/>
+                        <h:inputSecret value="#{loginBean.password}" />
+                        <br/>
+                        <h:commandButton value="Login" action="#{loginBean.userLogsIn()}"/>
+                        <br/>
+                    </h:panelGrid>
+                </h:form>
+                <h:link value="Create a New User Account" outcome="CreateUser.xhtml?faces-redirect=true" />
+                <h:link value="See Products in The Store" outcome="SeeStore.xhtml?faces-redirect=true" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

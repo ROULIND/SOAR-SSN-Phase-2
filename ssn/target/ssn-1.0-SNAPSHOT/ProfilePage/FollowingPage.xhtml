@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>SSN Social Network</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <h:outputStylesheet name="css/UserPage.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</h:head>
+<h:body>
+
+    <div class="columns">
+        <div class="column is-one-fifth fixed-column">
+            <center>
+                <div class="image is-128x128">
+                    <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                </div>
+                <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
+                <!-- User Buttons -->
+                <h:form>
+                    <p:button value="Home" icon="pi pi-home" styleClass="button"
+                              outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true"
+
+                    />
+                    <p:button value="Following" icon="pi pi-users" styleClass="bbutton"
+                              outcome="/ProfilePage/FollowingPage.xhtml?faces-redirect=true"
+                    />
+                    <p:button value="My Posts" icon="pi pi-align-justify" styleClass="button"
+                              outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
+                    <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
+                              outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
+                </h:form>
+                <div class="menu-button-container">
+                    <h:form>
+                        <p:growl id="messages" showDetail="false"/>
+                        <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
+                        <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                            <p:submenu label="Your Profile">
+                                <p:menuitem value="View your profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
+                            </p:submenu>
+                            <p:submenu label="Logout">
+                                <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </div>
+            </center>
+        </div>
+        <div class="main-content column">
+            <p class="has-text-centered title">Currently Following</p>
+            <ui:repeat value="#{loginBean.currentUser.following}" var="user">
+                <div class="box m-3">
+                    <h:outputText styleClass="is-size-5" value="#{user.username}" />
+                </div>
+
+            </ui:repeat>
+        </div>
+    </div>
+
+</h:body>
+
+
+</html>
