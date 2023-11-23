@@ -7,6 +7,8 @@ import com.mycompany.ssn.v1.exceptions.AlreadyExistsException;
 import com.mycompany.ssn.v1.exceptions.DoesNotExistException;
 import com.mycompany.ssn.v1.exceptions.UnauthorizedActionException;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,16 +42,24 @@ public class UserBean implements Serializable {
         this.selectedUser = user;
         return "/ProfilePage/ProfilePage.xhtml?faces-redirect=true";
     }
+    
+    
     public void createAUser() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         try {
-            if (!emailExists() && !usernameExists()) {
-                MockDatabase.addAUser(new User(generateUniqueId(),username, firstName, lastName, email, password));
+            if (!emailExists() && !usernameAlreadyExists()) {
+                MockDatabase.addAUser(new User(generateUniqueId(), username, firstName, lastName, email, password));
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User created successfully!", null));
             }
-        } catch (AlreadyExistsException | DoesNotExistException ex) {
+        } catch (AlreadyExistsException ex) {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null));
             System.out.println(ex.getMessage());
         }
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
     }
 
+    
+    
     protected static User findByUsername(String username) throws DoesNotExistException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getUsername().equals(username)) {
@@ -67,6 +77,16 @@ public class UserBean implements Serializable {
         }
         return false;
     }
+    
+    protected boolean usernameAlreadyExists() throws AlreadyExistsException {
+        for (User user : MockDatabase.getUsers()) {
+            if (user.getUsername().equals(username)) {
+                throw new AlreadyExistsException("This username (" + username + ") is already taken.");
+            }
+        }
+        return false;
+    }
+    
 
     protected boolean usernameExists() throws DoesNotExistException {
         for (User user : MockDatabase.getUsers()) {
