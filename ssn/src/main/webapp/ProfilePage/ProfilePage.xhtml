@@ -21,7 +21,8 @@
                 <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
                 <!-- User Buttons -->
                 <h:form>
-                    <p:button value="Home" icon="pi pi-home" styleClass="button" />
+                    <p:button value="Home" icon="pi pi-home" styleClass="button"
+                                outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true" />
                     <p:button value="Following" icon="pi pi-users" styleClass="button"
                               outcome="/ProfilePage/FollowingPage.xhtml?faces-redirect=true"
                     />

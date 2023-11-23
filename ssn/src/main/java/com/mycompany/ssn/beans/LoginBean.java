@@ -33,7 +33,7 @@ public class LoginBean implements Serializable {
     public String userLogsout() {
         currentUser = null;
 
-        return "/ssn";
+        return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
     public User getUserLoggedIn() {
