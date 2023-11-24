@@ -52,10 +52,14 @@
         <div class="main-content column">
             <p class="has-text-centered title">Currently Following</p>
             <ui:repeat value="#{loginBean.currentUser.following}" var="user">
-                <div class="box m-3">
-                    <h:outputText styleClass="is-size-5" value="#{user.username}" />
-                </div>
-
+                    <h:link outcome="#{userBean.goToProfilePage(user)}">
+                        <div class="box m-3">
+                            <span sstyle="cursor: pointer; color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'">
+                                <h:outputText value="#{user.username}" />
+                            </span>
+                            <span>(Followers: #{user.followers.size()})</span>
+                        </div>
+                    </h:link>
             </ui:repeat>
         </div>
     </div>

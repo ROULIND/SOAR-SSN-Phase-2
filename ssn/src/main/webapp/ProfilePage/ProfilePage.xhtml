@@ -51,7 +51,7 @@
             <center>
             <h:outputText styleClass="title has-text-centered" value="#{userBean.selectedUser.username}'s user page" />
             <br/>
-            <h:outputText styleClass="is-size-3 has-text-centered" value="#{userBean.selectedUser.followers.size()} followers" />
+            <h:outputText styleClass="is-size-3 has-text-centered" value="#{userBean.selectedUser.followers.size()} follower(s)" />
             <br/>
             <h:form>
                 <h:commandLink class="button" action="#{userBean.followUser(loginBean.currentUser, userBean.selectedUser)}">
