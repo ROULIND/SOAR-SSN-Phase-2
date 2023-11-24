@@ -5,6 +5,8 @@
 package com.mycompany.ssn.v1.Models;
 
 import java.util.ArrayList;
+import org.primefaces.model.file.UploadedFile;
+
 
 /**
  * The User class represents a user in the system.
@@ -48,7 +50,9 @@ public class User {
         this.followers = new ArrayList<>(); // Initializing the list of followers
         this.following = new ArrayList<>(); // Initializing the list of users being followed
     }
-/**
+
+
+    /**
     * Gets the list of users who follow the current user.
     *
     * @return ArrayList<User> The list of followers.

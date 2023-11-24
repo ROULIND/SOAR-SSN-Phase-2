@@ -39,9 +39,18 @@
                 <h:inputSecret id="password" value="#{userBean.password}" required="true" requiredMessage="Enter a valid password"  styleClass="input" />
                 <h:message for="password" styleClass="error-message" />
 
-                <center>
+                <h:outputText value="Profile Picture"/><br/>
+                <p:fileUpload id="pp" listener="#{userBean.upload}" mode="advanced" dragDropSupport="false"
+                              auto="true"
+                          update="messages" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(jpe?g|png)$/" />
+                <p:growl id="messages" showDetail="true" />
+
+                <h:message for="pp" styleClass="error-message" />
+
+
+            <center>
                 <h:commandButton value="Create account" action="#{userBean.createAUser()}"
-                                 styleClass="button is-primary mt-3"/>
+                                 styleClass="button is-primary mt-3" ajax="false"/>
                 </center>
         </div>
         <center>

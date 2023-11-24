@@ -1,7 +1,6 @@
 package com.mycompany.ssn.beans;
 
 import com.mycompany.ssn.v1.Models.User;
-import com.mycompany.ssn.v1.controllers.UserController;
 import com.mycompany.ssn.v1.database.MockDatabase;
 import com.mycompany.ssn.v1.exceptions.AlreadyExistsException;
 import com.mycompany.ssn.v1.exceptions.DoesNotExistException;
@@ -10,7 +9,13 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
-import java.io.Serializable;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +35,7 @@ public class UserBean implements Serializable {
     private User selectedUser;
 
 
-    
+
     public void setSelectedUser(User user) {
         this.selectedUser = user;
     }
@@ -42,8 +47,35 @@ public class UserBean implements Serializable {
         this.selectedUser = user;
         return "/ProfilePage/ProfilePage.xhtml?faces-redirect=true";
     }
-    
-    
+
+    public void upload(FileUploadEvent event) {
+
+
+        UploadedFile file = event.getFile();
+        try {
+            copyFile(event.getFile().getFileName(), file.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void copyFile(String fileName, InputStream in) {
+        String destination = "/tmp/";
+        try {
+            // write the inputStream to a FileOutputStream
+            Path path = Paths.get("src/test/resources/sample.txt");
+            byte[] buffer = java.nio.file.Files.readAllBytes(path);
+
+            File targetFile = new File("src/test/resources/targetFile.tmp");
+            OutputStream outStream = new FileOutputStream(targetFile);
+            outStream.write(buffer);
+
+            IOUtils.closeQuietly(outStream);
+            FacesMessage msg = new FacesMessage("Success! ", fileName + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void createAUser() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         try {
@@ -55,6 +87,8 @@ public class UserBean implements Serializable {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null));
             System.out.println(ex.getMessage());
         }
+
+
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
     }
 
