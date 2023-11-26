@@ -5,6 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="jakarta.faces.core">
 <h:head>
+    <!-- Page Head: Title and Stylesheets -->
     <title>SSN Social Network</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -13,7 +14,9 @@
 
 </h:head>
 <h:body>
+    <!-- Layout using columns -->
     <div class="columns">
+        <!-- Left Column for User Profile and Navigation -->
         <div class="column is-one-fifth fixed-column">
             <center>
                 <div class="image is-128x128">
@@ -52,6 +55,7 @@
             </div>
             </center>
         </div>
+        <!-- Main Content Column for User's Page and Posts -->
         <div class="main-content column">
             <center>
             <h:outputText styleClass="title has-text-centered" value="#{userBean.selectedUser.username}'s user page" />
@@ -59,7 +63,7 @@
             <h:outputText styleClass="is-size-3 has-text-centered" value="#{userBean.selectedUser.followers.size()} follower(s)" />
             <br/>
             <h:form>
-                
+                <!-- Follow/Unfollow Button -->
                 <h:commandLink class="button #{userBean.checkIfFollowing(loginBean.currentUser, userBean.selectedUser) ? 'is-danger' : ''}" action="#{userBean.toggleFollow(loginBean.currentUser, userBean.selectedUser)}"
                                rendered="#{!((userBean.selectedUser.username) eq (loginBean.getCurrentUser().username))}">
                     <span class="icon">
@@ -74,7 +78,7 @@
    
             </center>
 
-
+            <!-- Display of User's Posts -->    
             <div class="block m-3">
                 
                 

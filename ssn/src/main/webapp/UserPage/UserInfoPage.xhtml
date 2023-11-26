@@ -5,12 +5,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="jakarta.faces.core">
 <h:head>
+    <!-- Page Head with Title and Stylesheet Links -->
     <title>SSN Social Network</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet name="css/UserPage.css" />
-    <!-- Existing head content -->
+    <!-- JavaScript for Confirming Account Deletion -->
     <script type="text/javascript">
         function confirmDelete() {
             return confirm('Are you sure you want to delete your account? This action cannot be undone.');
@@ -19,7 +20,9 @@
 
 </h:head>
 <h:body>
+    <!-- Main Layout -->
     <div class="columns">
+        <!-- Left Column for User Profile and Navigation -->
         <div class="column is-one-fifth fixed-column">
             <center>
                 <div class="image is-128x128">
@@ -58,11 +61,12 @@
             </div>
             </center>
         </div>
+        <!-- Middle Column for Account Information -->
         <div class="main-content column">
             <center>
                 <h:outputText styleClass="title has-text-centered" value="My Account's informations" />
                 <br/>
-
+                <!-- Title and Form for Editing Account Information -->    
                 <h:form>
                     <div class="box user-creation-box">
                             <br/>
@@ -108,6 +112,7 @@
 
             
         </div>
+        <!-- Right Column for Profile Picture Upload -->
         <div class="column is-one-fifth mx-3">  
             <h:form enctype="multipart/form-data">
                 <!-- Your existing input fields -->

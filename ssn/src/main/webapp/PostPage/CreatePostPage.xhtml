@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <!-- Page Title and CSS Links -->
         <title>SSN Social Network</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -11,14 +12,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <!-- Title for Create Post Page -->
         <p class="title has-text-centered">Create Post</p>
+        <!-- Main Content Layout -->
         <div class="block">
             <div class="columns">
+                <!-- User Profile and Navigation Column -->
                 <div class="column is-one-fifth fixed-column">
                     <center>
+                        <!-- User Profile Picture -->
                         <div class="image is-128x128">
                             <img class="is-rounded" src="#{request.contextPath}/images/#{loginBean.getCurrentUser().profilePicture}" alt="User Picture" style="object-fit: cover; max-height: 128px;max-width: 128px;"/>
                         </div>
+                        <!-- Display Username -->
                         <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
 
                         <!-- User Buttons -->
@@ -55,13 +61,15 @@
             
           
             
-            
+                <!-- Column for Creating Post -->
                 <div class="column main-content">
                     <div class="block">
+                        <!-- Form for Creating a New Post -->
                         <h:form styleClass="block m-3">
                             <h:inputTextarea class="textarea" placeholder="Write your post here" value="#{postBean.currentPostText}" id="postText"></h:inputTextarea>
                             <h:outputText id="errorText" style="color: red; margin-top: 5px;" value="#{postBean.errorMessage}" />
                             <br/>
+                            <!-- Publish Button -->
                             <h:commandLink class="button is-primary mt-1" action="#{postBean.createPost(loginBean.getCurrentUser())}">
                                 Publish
                             </h:commandLink>
@@ -70,6 +78,7 @@
 
               
             </div>
+            <!-- Right Spacer Column -->
             <div class="column is-one-fifth"></div>
         </div>
         </div>

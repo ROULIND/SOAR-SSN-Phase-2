@@ -4,25 +4,28 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <!-- Head section with links to CSS for styling and the page title -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
         <title>SSN Social Network</title>
     </h:head>
     <h:body>
+        <!-- Layout using Bulma's columns -->
         <div class="columns">
+            <!-- Left Column for Background Image -->
             <div class="column">
                 <h:graphicImage value="#{resource['images/background-3.jpg']}"  />
             </div>
-
+            <!-- Right Column for Login Form and Additional Information -->    
             <div class="column">
             <br/>
             <br/>
             <p class="title has-text-centered" style="margin-bottom: 30px;">Simple Social Network</p>
+            <!-- Login Form -->
             <h:form>
                     <h:form>
                         <center>
-                            
+                            <!-- Box container for the login form -->
                             <div class="box">
                                 <p class="is-size-5">Login to your account</p>
                                 <h:panelGrid columns="1">

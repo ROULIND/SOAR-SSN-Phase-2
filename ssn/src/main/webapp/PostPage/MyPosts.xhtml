@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
+    <!-- Page setup with CSS links and title -->
     <title>SSN Social Network</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -11,11 +12,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </h:head>
 <h:body>
+    <!-- Title for the 'My Posts' page -->
     <p class="title has-text-centered">My Posts</p>
-
+    <!-- Main layout using Bulma's columns -->
     <div class="columns">
+        <!-- User Profile and Navigation Column -->
         <div class="column is-one-fifth fixed-column">
             <center>
+                <!-- User profile picture -->
                 <div class="image is-128x128">
                     <img class="is-rounded" src="#{request.contextPath}/images/#{loginBean.getCurrentUser().profilePicture}" alt="User Picture" style="object-fit: cover; max-height: 128px;max-width: 128px;"/>
                 </div>
@@ -51,9 +55,11 @@
             </center>
         </div>
 
-
+        <!-- Main Content Column for Displaying Posts -->
         <div class="column main-content">
+            <!-- Loop through each post by the user -->
             <ui:repeat value="#{postBean.getPostsByUser(loginBean.currentUser)}" var="post">
+                <!-- Link to post details -->
                 <h:form>
                     <h:commandLink class="box mx-3" style="cursor: pointer;"
                                    action="#{postBean.setSelectedPost(post.id)}">
@@ -92,6 +98,7 @@
                 </h:form>
             </ui:repeat>
         </div>
+        <!-- Right Spacer Column -->
         <div class="column is-one-fifth">
                     
         </div>

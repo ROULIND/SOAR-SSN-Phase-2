@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <!-- Page Title and CSS Links -->
         <title>SSN Social Network</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -11,8 +12,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-
+    <!-- Page body with content layout -->   
     <div class="columns">
+        <!-- User Profile and Navigation Column -->
         <div class="column is-one-fifth fixed-column">
                     <center>
                         <div class="image is-128x128">
@@ -34,6 +36,7 @@
                         </h:form>
                         <div class="menu-button-container">
                         <h:form>
+                            <!-- Navigation Buttons -->
                             <p:growl id="messages" showDetail="false"/>
                             <p:commandButton id="dynaButton" value="Settings" type="button" icon="pi pi-cog" styleClass="button"/>
                             <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
@@ -41,6 +44,7 @@
                                     <p:menuitem value="My profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
                                     <p:menuitem value="My account" action="#{userBean.goToInfoPage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
                                 </p:submenu>
+                                <!-- Settings and Logout Menu -->
                                 <p:submenu label="Logout">
                                     <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
                                 </p:submenu>
@@ -49,7 +53,9 @@
                     </div>
                     </center>
                 </div>
+        <!-- Main Content Column for Displaying Post Details and Comments -->
         <div class="main-content column">
+            <!-- Post details section -->
             <div class="box mx-3" style="cursor: pointer;">
                 
                 <div class="columns">
@@ -75,6 +81,7 @@
                 <hr/>
                 <center>
                     <div class="columns">
+                        <!-- Interactions section for likes and comments -->
                         <div class="column is-half small-padding">
                             <h:form prependId="false">
                                 <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getLikes().size()}" />
