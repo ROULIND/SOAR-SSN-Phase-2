@@ -32,8 +32,9 @@ public class LoginBean implements Serializable {
         return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
-    public void userLogsout() {
+    public String userLogsout() {
         currentUser = null;
+        return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
     public User getUserLoggedIn() {
