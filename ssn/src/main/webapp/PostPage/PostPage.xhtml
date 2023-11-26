@@ -51,16 +51,27 @@
                 </div>
         <div class="main-content column">
             <div class="box mx-3" style="cursor: pointer;">
-                <h:form>
-                    <h:commandLink styleClass="is-size-5"
-                                   action="#{userBean.goToProfilePage(userBean.getUserFromId(postBean.getSelectedPost().userId))}"
-                                   value="#{userBean.getUserFromId(postBean.getSelectedPost().userId).getUsername()}" />
-                </h:form>
-                <br/>
-                <h:outputText styleClass="is-size-7" value="#{postBean.getSelectedPost().datePublished}" />
+                
+                <div class="columns">
+                    <div class="column is-2">
+                        <figure class="image is-128x128">
+                            <img src="#{request.contextPath}/images/#{userBean.getUserFromId(postBean.getSelectedPost().userId).getProfilePicture()}" style="object-fit: cover; max-height: 128px;max-width: 128px;"/>
+                        </figure>
+                    </div>
+                    <div class="column">
+                        <h:form>
+                            <h:commandLink styleClass="is-size-5"
+                                           action="#{userBean.goToProfilePage(userBean.getUserFromId(postBean.getSelectedPost().userId))}"
+                                           value="#{userBean.getUserFromId(postBean.getSelectedPost().userId).getUsername()}" />
+                        </h:form>
+                        <h:outputText styleClass="is-size-7" value="#{postBean.getSelectedPost().datePublished}" />
 
-                <br/>
-                <h:outputText styleClass="is-size-4" value="#{postBean.getSelectedPost().text}" />
+                        <br/>
+                        <h:outputText styleClass="is-size-4" value="#{postBean.getSelectedPost().text}" />
+                    </div>
+                </div>
+                
+                
                 <hr/>
                 <center>
                     <div class="columns">
@@ -112,6 +123,9 @@
                 </div>
 
             </ui:repeat>
+        </div>
+        <div class="column is-one-fifth">
+            
         </div>
 
     </div>
