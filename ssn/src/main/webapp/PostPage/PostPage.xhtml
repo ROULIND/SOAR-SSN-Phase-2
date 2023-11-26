@@ -80,10 +80,10 @@
                                 <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getLikes().size()}" />
 
                                 <h:commandLink
-                                        action="#{postBean.addLike(loginBean.getCurrentUser(), postBean.getSelectedPost())}"
-                                        styleClass="#{postBean.postIsLikedByUser(loginBean.getCurrentUser(), postBean.getSelectedPost()) ? 'icon color-red' : 'icon'}">
+                                        action="#{postBean.toggleLike(loginBean.getCurrentUser(), postBean.getSelectedPost())}"
+                                        >
                                     <span>
-                                        <i class="fas fa-heart"></i>
+                                        <i class="fas fa-heart" style="#{postBean.postIsLikedByUser(loginBean.getCurrentUser(), postBean.getSelectedPost()) ? 'color:red;' : 'color:#4a4a4a;' }"></i>
                                     </span>
                                 </h:commandLink>
                             </h:form>

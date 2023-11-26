@@ -122,6 +122,14 @@ public class PostBean implements Serializable {
 
         return reversedPosts;
     }
+    
+    public void toggleLike(User user, Post post) throws DoesNotExistException {
+        if(postIsLikedByUser(user, post)){
+            removeLike(user, post);
+        } else {
+            addLike(user, post);
+        }
+    }
 
     public void addLike(User user, Post post) throws DoesNotExistException {
         if (post == null) {
