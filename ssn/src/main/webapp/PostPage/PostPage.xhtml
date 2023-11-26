@@ -76,8 +76,9 @@
                 <center>
                     <div class="columns">
                         <div class="column is-half small-padding">
-                            <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getLikes().size()}" />
                             <h:form prependId="false">
+                                <h:outputText styleClass="is-size-5" value="#{postBean.getSelectedPost().getLikes().size()}" />
+
                                 <h:commandLink
                                         action="#{postBean.addLike(loginBean.getCurrentUser(), postBean.getSelectedPost())}"
                                         styleClass="#{postBean.postIsLikedByUser(loginBean.getCurrentUser(), postBean.getSelectedPost()) ? 'icon color-red' : 'icon'}">
