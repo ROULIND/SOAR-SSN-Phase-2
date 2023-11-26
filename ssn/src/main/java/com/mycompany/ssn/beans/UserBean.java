@@ -29,10 +29,16 @@ import org.primefaces.shaded.commons.io.FilenameUtils;
 /**
  *
  * @author dimitriroulin
+ *
+ * Bean class representing user-related operations and interactions.
+ *
+ * This class is annotated as a named session-scoped bean, making it suitable
+ * for handling user-related actions and data throughout a user's session.
  */
 @Named(value = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
+    // Fields representing user attributes and uploaded profile picture
     private String username = "";
     private String firstName = "";
     private String lastName = "";
@@ -43,19 +49,38 @@ public class UserBean implements Serializable {
     private User selectedUser;
 
 
-    
+/**
+     * Sets the selected user for further interactions.
+     *
+     * @param user The user to set as selected.
+     */    
     public void setSelectedUser(User user) {
         this.selectedUser = user;
     }
+/**
+     * Gets the currently selected user.
+     *
+     * @return User The currently selected user.
+     */
     public User getSelectedUser() {
         return selectedUser;
     }
-
+/**
+     * Navigates to the user's profile page.
+     *
+     * @param user The user whose profile page is being accessed.
+     * @return String The navigation outcome.
+     */
     public String goToProfilePage(User user) {
         this.selectedUser = user;
         return "/ProfilePage/ProfilePage.xhtml?faces-redirect=true";
     }
-    
+/**
+     * Navigates to the user's information page.
+     *
+     * @param user The user whose information page is being accessed.
+     * @return String The navigation outcome.
+     */    
     public String goToInfoPage(User user) {
         this.username = user.getUsername();
         this.firstName = user.getFirstName();
@@ -65,7 +90,10 @@ public class UserBean implements Serializable {
         return "/UserPage/UserInfoPage.xhtml?faces-redirect=true";
     }
     
-    
+/**
+     * Creates a new user and adds it to the MockDatabase.
+     * Displays appropriate messages based on success or failure.
+     */    
     public void createAUser() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         try {
@@ -79,7 +107,12 @@ public class UserBean implements Serializable {
         }
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
     }
-    
+
+/**
+     * Deletes a user, removing associated posts, likes, and comments.
+     *
+     * @return String The navigation outcome.
+     */    
     public String deleteAUser() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
@@ -125,7 +158,11 @@ public class UserBean implements Serializable {
         return null;
     }
 
-    
+/**
+     * Modifies user information and updates the MockDatabase.
+     *
+     * @param targettedUser The user to modify.
+     */    
     public void modifyAUser(User targettedUser) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         // Check if the username or email is already taken by another user
@@ -162,8 +199,13 @@ public class UserBean implements Serializable {
         }
     }
 
-    
-    
+/**
+     * Finds a user based on their username.
+     *
+     * @param username The username to search for.
+     * @return User The found user.
+     * @throws DoesNotExistException If the user does not exist.
+     */        
     protected static User findByUsername(String username) throws DoesNotExistException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getUsername().equals(username)) {
@@ -173,6 +215,12 @@ public class UserBean implements Serializable {
         throw new DoesNotExistException("The user " + username + " does not exist.");
     }
 
+/**
+     * Checks if an email already exists in the MockDatabase.
+    *
+    * @return boolean True if the email exists, throws AlreadyExistsException otherwise.
+    * @throws AlreadyExistsException If the email already exists.
+    */
     protected boolean emailExists() throws AlreadyExistsException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getEmail().equals(email)) {
@@ -181,7 +229,13 @@ public class UserBean implements Serializable {
         }
         return false;
     }
-    
+
+/**
+     * Checks if a username already exists in the MockDatabase.
+    *
+    * @return boolean True if the username exists, throws AlreadyExistsException otherwise.
+    * @throws AlreadyExistsException If the username already exists.
+    */
     protected boolean usernameAlreadyExists() throws AlreadyExistsException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getUsername().equals(username)) {
@@ -191,7 +245,12 @@ public class UserBean implements Serializable {
         return false;
     }
     
-
+/**
+    * Checks if a username exists in the MockDatabase.
+    *
+    * @return boolean True if the username exists, false otherwise.
+    * @throws DoesNotExistException If the username does not exist.
+    */
     protected boolean usernameExists() throws DoesNotExistException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getUsername().equals(username)) {
@@ -201,6 +260,13 @@ public class UserBean implements Serializable {
         return false;
     }
 
+/**
+    * Gets a user based on their unique identifier (ID).
+    *
+     * @param id The ID of the user to retrieve.
+    * @return User The found user.
+    * @throws DoesNotExistException If the user with the given ID does not exist.
+    */
     public User getUserFromId(int id) throws DoesNotExistException {
         for (User user : MockDatabase.getUsers()) {
             if (user.getId() == id) {
@@ -209,7 +275,12 @@ public class UserBean implements Serializable {
         }
         throw new DoesNotExistException("The user with id " + id + " does not exist.");
     }
-    
+
+/**
+     * Generates a unique ID for a new user.
+     *
+     * @return int The generated unique ID.
+     */    
     public int generateUniqueId() {
         List<Integer> listOfExistingId = new ArrayList<Integer>();
         // Assuming User has a method getId() that returns an int
@@ -226,65 +297,139 @@ public class UserBean implements Serializable {
         return maxId + 1;
     }
 
-
+/**
+ * Gets the email of the user.
+ *
+ * @return String The email of the user.
+ */
     public String getEmail() {
         return email;
     }
-
+    
+/**
+ * Gets the first name of the user.
+ *
+ * @return String The first name of the user.
+ */
     public String getFirstName() {
         return firstName;
     }
-
+    
+/**
+ * Gets the last name of the user.
+ *
+ * @return String The last name of the user.
+ */
     public String getLastName() {
         return lastName;
     }
-
+    
+/**
+ * Gets the password of the user.
+ *
+ * @return String The password of the user.
+ */
     public String getPassword() {
         return password;
     }
-
+    
+/**
+ * Gets the username of the user.
+ *
+ * @return String The username of the user.
+ */
     public String getUsername() {
         return username;
     }
     
+/**
+ * Gets the profile picture path of the user.
+ *
+ * @return String The profile picture path of the user.
+ */    
     public String getProfilePicture() {
         return profilePicture;
     }
     
+/**
+ * Sets the username of the user.
+ *
+ * @param username The new username to set.
+ */    
     public void setUsername(String username) {
         this.username = username;
     }
     
-
+/**
+ * Sets the email of the user.
+ *
+ * @param email The new email to set.
+ */    
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
+/**
+ * Sets the first name of the user.
+ *
+ * @param firstName The new first name to set.
+ */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+/**
+ * Sets the last name of the user.
+ *
+ * @param lastName The new last name to set.
+ */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+/**
+ * Sets the password of the user.
+ *
+ * @param password The new password to set.
+ */
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+/**
+ * Sets the profile picture path of the user.
+ *
+ * @param profilePicture The new profile picture path to set.
+ */
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 
-    // Getters and setters for uploadedFile
+/**
+ * Gets the uploaded file representing the user's profile picture.
+ *
+ * @return Part The uploaded file.
+ */
     public Part getUploadedFile() {
         return uploadedFile;
     }
 
+/**
+ * Sets the uploaded file representing the user's profile picture.
+ *
+ * @param uploadedFile The new uploaded file to set.
+ */
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
-    
+
+/**
+ * Allows the current user to follow another user.
+ *
+ * @param user The current user.
+ * @param userToFollow The user to follow.
+ * @throws UnauthorizedActionException If the action is not authorized.
+ */
     public void followUser(User user, User userToFollow) throws UnauthorizedActionException {
         if (user.getFollowing().contains(userToFollow)) {
             return;
@@ -296,6 +441,12 @@ public class UserBean implements Serializable {
 
     }
     
+/**
+ * Allows the current user to unfollow another user.
+ *
+ * @param user The current user.
+ * @param userToUnfollow The user to unfollow.
+ */
     public void unfollowUser(User user, User userToUnfollow){
         if ((!userToUnfollow.getFollowers().contains(user)) && !(user.getFollowing().contains(userToUnfollow))) {
             return;
@@ -305,7 +456,13 @@ public class UserBean implements Serializable {
         
     }
     
-    
+/**
+ * Toggles the follow status of the current user for another user.
+ *
+ * @param user The current user.
+ * @param userTargeted The user to toggle follow status.
+ * @throws UnauthorizedActionException If the action is not authorized.
+ */    
     public void toggleFollow(User user, User userTargetted) throws UnauthorizedActionException{
         if ((userTargetted.getFollowers().contains(user)) && (user.getFollowing().contains(userTargetted))) {
             unfollowUser(user, userTargetted);
@@ -315,7 +472,12 @@ public class UserBean implements Serializable {
         
     }
     
-
+/**
+ * Removes a user from the followers list of another user.
+ *
+ * @param user The user to remove.
+ * @param userToUnfollow The user to remove from the followers list.
+ */
     public static void removeUserFromFollowersList(User user, User userToUnfollow) {
         // Make sure userToUnfollow is following user
         if (!userToUnfollow.getFollowing().contains(user)) {
@@ -324,6 +486,12 @@ public class UserBean implements Serializable {
         user.getFollowers().remove(userToUnfollow);
     }
 
+/**
+ * Removes a user from the followed list of another user.
+ *
+ * @param user The user to remove.
+ * @param userToUnfollow The user to remove from the followed list.
+ */
     public static void removeUserFromFollowedList(User user, User userToUnfollow) {
         // Make sure userToUnfollow is following user
         if (!userToUnfollow.getFollowers().contains(user)) {
@@ -331,7 +499,14 @@ public class UserBean implements Serializable {
         }
         user.getFollowing().remove(userToUnfollow);
     }
-    
+
+/**
+ * Checks if the current user is following another user.
+ *
+ * @param user The current user.
+ * @param userToCheck The user to check if the current user is following.
+ * @return boolean True if the current user is following, false otherwise.
+ */    
     public boolean checkIfFollowing(User user, User userToCheck) {
         if ((userToCheck.getFollowers().contains(user)) && (user.getFollowing().contains(userToCheck))) {
             return true;
@@ -341,7 +516,7 @@ public class UserBean implements Serializable {
     }
     
     
-
+// Work in progress for the next phase 3
     public void uploadProfilePicture(User currentUser) throws MessagingException {
         FacesContext context = FacesContext.getCurrentInstance();
         System.out.println("uploadProfilePicture called");
