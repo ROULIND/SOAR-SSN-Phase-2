@@ -7,6 +7,8 @@ import com.mycompany.ssn.beans.LoginBean;
 import com.mycompany.ssn.beans.UserBean;
 import com.mycompany.ssn.v1.exceptions.DoesNotExistException;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;
 
@@ -18,6 +20,7 @@ import java.io.Serializable;
 @SessionScoped
 public class CommentBean implements Serializable {
     private String currentCommentText = "";
+
 
     public void setCurrentCommentText(String currentCommentText) {
         this.currentCommentText = currentCommentText;
@@ -47,12 +50,18 @@ public class CommentBean implements Serializable {
             throw new IllegalArgumentException("Comment text cannot be empty.");
         }
         //Verify the lengh of the comment text
-        if (this.currentCommentText == null || this.currentCommentText.length() > 256) {
-        throw new IllegalArgumentException("Comment text must be 1-256 characters long.");
-    }
-        Comment comment = new Comment(post.getId(), user.getId(), this.currentCommentText);
-        post.addComment(comment);
-        this.currentCommentText = ""; // reset the comment handler
+        if (this.currentCommentText == null || this.currentCommentText.length() > 256 || this.currentCommentText.length() == 0) {
+            // Faces launch an error message
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Comment must be between 1 and 256 characters long", null));
+        }
+        else{
+            Comment comment = new Comment(post.getId(), user.getId(), this.currentCommentText);
+            post.addComment(comment);
+            this.currentCommentText = ""; // reset the comment handler
+        }
+
     }
 
 
