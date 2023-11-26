@@ -4,20 +4,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    
+<!-- Head section of the HTML document -->
 <h:head>
-    <title>CREATE NEW ACCOUNT</title>
+    <title>CREATE NEW ACCOUNT</title> <!-- Title of the webpage -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"/>
     <h:outputStylesheet name="css/CreateUserPage.css" />
 
 </h:head>
+<!-- Body of the HTML document -->
 <h:body>
     <style>
+        /* CSS styles defined within the document */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
+        /* Background styling for the body */
         body {
             top:-20px;
             background-image: url("#{request.contextPath}/images/background-1.jpg");
@@ -39,38 +44,46 @@
     </style>
     <p class="title has-text-centered" style="padding-top: 50px; color: white">Create your account</p>
     <br/><br/>
-    
+    <!-- User account creation form -->
     <h:form>
         <div class="box user-creation-box">
+                 <!-- Global error messages display area -->
                 <h:messages globalOnly="true" styleClass="error-message"/>
                 <br/>
+                <!-- Username input field -->
                 <h:outputText value="Username"/>
                 <h:inputText id="username" value="#{userBean.username}" required="true" requiredMessage="Enter a valid username" styleClass="input" />
                 <h:message for="username" styleClass="error-message" />
                 <br/>
+                <!-- First name input field -->
                 <h:outputText value="First Name"/>
                 <h:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="Enter a valid First Name" styleClass="input" />
                 <h:message for="firstname" styleClass="error-message" />
                 <br/>
+                <!-- Last name input field -->
                 <h:outputText value="Last Name"/>
                 <h:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="Enter a valid Last Name"  styleClass="input" />
                 <h:message for="lastname" styleClass="error-message" />
                 <br/>
+                <!-- Email input field with validation -->
                 <h:outputText value="E-mail"/>
                 <h:inputText id="email" value="#{userBean.email}" validatorMessage="This is not a valid email format." styleClass="input">
                     <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
                 </h:inputText>
                 <h:message for="email" styleClass="error-message" />
                 <br/>
+                <!-- Password input field -->
                 <h:outputText value="Password"/>
                 <h:inputSecret id="password" value="#{userBean.password}" required="true" requiredMessage="Enter a valid password"  styleClass="input" />
                 <h:message for="password" styleClass="error-message" />
                 <br/>
+                <!-- Button to submit the form -->
                 <center>
                 <h:commandButton value="Create account" action="#{userBean.createAUser()}"
                                  styleClass="button is-primary mt-3"/>
                 </center>
         </div>
+        <!-- Link to return to the login page -->
         <center>
             
             <h:link value="Return to Login page" outcome="MainPage.xhtml?faces-redirect=true" styleClass="return-link"/>

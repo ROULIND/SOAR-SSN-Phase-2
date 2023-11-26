@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <!-- Page Head: Title and Stylesheets -->
         <title>SSN Social Network</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -13,9 +14,11 @@
         <title>SSN Social Network</title>
     </h:head>
     <h:body>
+        <!-- Network Logo -->
         <div class="logo-container">
             <img src="https://sb.pandasoft.at/public/img/pandalogo.png" alt="Logo SSN Social Network" />
         </div>
+        <!-- Main Layout -->
         <div class="block">
             <div class="columns">
                 <!-- TODO: maybe implement search bar later
@@ -24,6 +27,7 @@
                     <p:commandButton value="Chercher" action="#{searchBean.search()}" icon="pi pi-search" styleClass="search-button"/>
                 </h:form>
                 -->
+                <!-- Left Column for User Profile and Navigation -->
                 <div class="column is-one-fifth fixed-column">
                     <center>
                         <div class="image is-128x128">
@@ -60,7 +64,9 @@
                     </div>
                     </center>
                 </div>
+                <!-- Main Content Column for Displaying Posts -->
                 <div class="column main-content">
+                    <!-- Loop through each post -->
                     <ui:repeat value="#{postBean.getPosts()}" var="post">
                         <h:form>
                             <h:commandLink class="box mx-3" style="cursor: pointer;"

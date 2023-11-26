@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
+    <!-- Page Title and Stylesheet Links -->
     <title>SSN Social Network</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -11,10 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </h:head>
 <h:body>
-
+    <!-- Page body with content layout -->
     <div class="columns">
+        <!-- Left Column for User Profile and Navigation -->
         <div class="column is-one-fifth fixed-column">
             <center>
+                <!-- User Profile Picture and Username -->
                 <div class="image is-128x128">
                     <img class="is-rounded" src="#{request.contextPath}/images/#{loginBean.getCurrentUser().profilePicture}" alt="User Picture" style="object-fit: cover; max-height: 128px;max-width: 128px;"/>
                 </div>
@@ -50,7 +53,9 @@
             </center>
         </div>
         
+        <!-- Middle Column for Following List -->
         <div class="main-content column">
+            <!-- Title for Following Section -->
             <p class="has-text-centered title">Following</p>
             <ui:repeat value="#{loginBean.currentUser.following}" var="user">
                     <h:link outcome="#{userBean.goToProfilePage(user)}">
@@ -63,6 +68,7 @@
                     </h:link>
             </ui:repeat>
         </div>
+        <!-- Right Column for Followers List -->
         <div class="column" style="padding-top: 65px;">
             <p class="has-text-centered title">Followers</p>
             <ui:repeat value="#{loginBean.currentUser.followers}" var="user">
