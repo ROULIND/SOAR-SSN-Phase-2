@@ -16,7 +16,8 @@ public class LoginBean implements Serializable {
     private String username = "";
     private String password = "";
     private User currentUser;
-
+    private String messageError = "";
+    
     public String userLogsIn() {
         try {
             var user = UserBean.findByUsername(username);
@@ -27,13 +28,12 @@ public class LoginBean implements Serializable {
         } catch (DoesNotExistException ex) {
             System.out.println(ex.getMessage());
         }
+        messageError = "Username or Passeword incorrect";
         return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
-    public String userLogsout() {
+    public void userLogsout() {
         currentUser = null;
-
-        return "/MainPage/MainPage.xhtml?faces-redirect=true";
     }
 
     public User getUserLoggedIn() {
@@ -63,4 +63,10 @@ public class LoginBean implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getMessageError() {
+        return messageError;
+    }
+    public void setMessageErroe(String newMessageError) {
+    this.messageError = newMessageError;
+}
 }
