@@ -21,6 +21,10 @@ import java.util.List;
 /**
  *
  * @author jonathanstefanov
+ *
+ * The PostBean class serves as a managed bean for handling posts in the system.
+ * It is session-scoped and is responsible for managing the creation, retrieval,
+ * and interaction with posts, including likes and comments.
  */
 @Named(value = "postBean")
 @SessionScoped
@@ -33,7 +37,12 @@ public class PostBean implements Serializable {
     
     private String errorMessage;
 
-
+/**
+     * Retrieves a post based on its ID.
+     *
+     * @param id The ID of the post to retrieve.
+     * @return Post The retrieved post or null if not found.
+     */
     public static Post getPost(int id) {
         for (Post post : posts) {
             if (post.getId() == id) {
@@ -42,15 +51,28 @@ public class PostBean implements Serializable {
         }
         return null;
     }
-
+/**
+     * Sets the current post text.
+     *
+     * @param currentPostText The new post text to be set.
+     */
     public void setCurrentPostText(String currentPostText) {
         this.currentPostText = currentPostText;
     }
-
+/**
+     * Gets the current post text.
+     *
+     * @return String The current post text.
+     */
     public String getCurrentPostText() {
         return currentPostText;
     }
-
+/**
+     * Retrieves posts made by a specific user.
+     *
+     * @param user The user whose posts are to be retrieved.
+     * @return ArrayList<Post> The list of posts made by the user, reversed.
+     */
     public static ArrayList<Post> getPostsByUser(User user) {
         ArrayList<Post> postsByUser = new ArrayList<Post>();
         for (Post post : posts) {
@@ -67,11 +89,20 @@ public class PostBean implements Serializable {
         return postsByUser;
     }
 
-    //TODO: change commandButton to Link
+/**
+     * Redirects to the page for creating a new post.
+     *
+     * @return String The navigation outcome.
+     */
     public String goToCreatePostPage() {
         return "/PostPage/CreatePostPage.xhtml?faces-redirect=true";
     }
-    // Method for creating a new publication
+/**
+     * Creates a new post and adds it to the list of posts.
+     *
+     * @param user The user creating the post.
+     * @return String The navigation outcome.
+     */
     public String createPost(User user) {
         String text = this.currentPostText;
 
@@ -104,12 +135,20 @@ public class PostBean implements Serializable {
             return null;  // Navigation fails on error
     }
 }
-    
+/**
+     * Gets the error message related to post creation failures.
+     *
+     * @return String The error message.
+     */    
      public String getErrorMessage() {
         return errorMessage;
     }
      
-    // Method to obtain the list of publications
+/**
+     * Retrieves the list of posts, reversed.
+     *
+     * @return List<Post> The reversed list of posts.
+     */
     public static List<Post> getPosts() {
         // Fetch the current posts from MockDatabase
         PostBean.posts = new ArrayList<>(MockDatabase.getPosts());
@@ -122,7 +161,13 @@ public class PostBean implements Serializable {
 
         return reversedPosts;
     }
-    
+/**
+     * Toggles the like status for a post by a user.
+     *
+     * @param user The user performing the like/unlike action.
+     * @param post The post to like/unlike.
+     * @throws DoesNotExistException If the post or user does not exist.
+     */    
     public void toggleLike(User user, Post post) throws DoesNotExistException {
         if(postIsLikedByUser(user, post)){
             removeLike(user, post);
@@ -131,6 +176,13 @@ public class PostBean implements Serializable {
         }
     }
 
+/**
+     * Adds a like to the specified post by the given user.
+     *
+     * @param user The user adding the like.
+     * @param post The post to which the like is added.
+     * @throws DoesNotExistException If the post or user does not exist.
+     */
     public void addLike(User user, Post post) throws DoesNotExistException {
         if (post == null) {
             throw new DoesNotExistException("Post does not exist.");
@@ -140,7 +192,14 @@ public class PostBean implements Serializable {
         }
         post.addLike(user.getId());
     }
-    
+
+/**
+     * Removes a like from the specified post by the given user.
+     *
+     * @param user The user removing the like.
+     * @param post The post from which the like is removed.
+     * @throws DoesNotExistException If the post or user does not exist.
+     */
     public void removeLike(User user, Post post) throws DoesNotExistException {
         if (post == null) {
             throw new DoesNotExistException("Post does not exist.");
@@ -151,6 +210,14 @@ public class PostBean implements Serializable {
         post.removeLike(user.getId());
     }
 
+/**
+     * Checks if a post is liked by a specific user.
+     *
+     * @param user The user whose like status is checked.
+     * @param post The post to check for likes.
+     * @return boolean True if the post is liked by the user, false otherwise.
+     * @throws DoesNotExistException If the post or user does not exist.
+     */
     public boolean postIsLikedByUser(User user, Post post) throws DoesNotExistException {
         if (post == null) {
             throw new DoesNotExistException("Post does not exist.");
@@ -168,7 +235,12 @@ public class PostBean implements Serializable {
 
         return isLiked;
     }
-
+/**
+     * Retrieves a post based on its ID.
+     *
+     * @param postId The ID of the post to retrieve.
+     * @return Post The retrieved post or null if not found.
+     */
     public static Post showPost(int postId) {
         for (Post post : posts) {
             if (post.getId() == postId) {
@@ -177,7 +249,11 @@ public class PostBean implements Serializable {
         }
         return null;
     }
-
+/**
+     * Displays the details of all posts as a string.
+     *
+     * @return String A concatenated string of post details.
+     */
     public static String displayPosts() {
         String strDisplay = "";
         for(Post post : getPosts()){
@@ -185,11 +261,20 @@ public class PostBean implements Serializable {
         }
         return strDisplay;
     }
-
+/**
+     * Gets the currently selected post.
+     *
+     * @return Post The currently selected post.
+     */
     public Post getSelectedPost() {
         return selectedPost;
     }
-
+/**
+     * Sets the selected post based on its ID and navigates to the post page.
+     *
+     * @param postId The ID of the post to set as selected.
+     * @return String The navigation outcome.
+     */
     public String setSelectedPost(int postId) {
         Post selectedPost = showPost(postId);
         this.selectedPost = selectedPost;

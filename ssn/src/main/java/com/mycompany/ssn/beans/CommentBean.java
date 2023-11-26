@@ -20,6 +20,12 @@ import java.io.Serializable;
 @SessionScoped
 public class CommentBean implements Serializable {
     private String currentCommentText = "";
+    
+/**
+     * Sets the current comment text.
+     *
+     * @param currentCommentText The new comment text to be set.
+     */
 
 
     public void setCurrentCommentText(String currentCommentText) {
@@ -27,14 +33,24 @@ public class CommentBean implements Serializable {
         //Line break after 180 characters
         this.currentCommentText = currentCommentText.replaceAll("(.{180})", "$1\n");
     }
-
+/**
+     * Gets the current comment text.
+     *
+     * @return String The current comment text.
+     */
+    
     public String getCurrentCommentText() {
         return currentCommentText;
     }
-
+/**
+     * Creates and adds a new comment to the specified post by the given user.
+     *
+     * @param user The user making the comment.
+     * @param post The post to which the comment is added.
+     * @throws IllegalArgumentException If the user, post, or comment text is invalid.
+     */
 
     public void makeComment(User user, Post post) throws IllegalArgumentException {
-        //TODO: could just use loginBean to get the connected user?
         // Verify if the user exists
         if (user == null) {
             throw new IllegalArgumentException("Invalid user.");
