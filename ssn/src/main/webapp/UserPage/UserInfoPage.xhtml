@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet name="css/UserPage.css" />
+    <!-- Existing head content -->
+    <script type="text/javascript">
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete your account? This action cannot be undone.');
+        }
+    </script>
 
 </h:head>
 <h:body>
@@ -54,71 +60,69 @@
         </div>
         <div class="main-content column">
             <center>
-            <h:outputText styleClass="title has-text-centered" value="#{userBean.selectedUser.username}'s user page" />
-            <br/>
-            <h:outputText styleClass="is-size-3 has-text-centered" value="#{userBean.selectedUser.followers.size()} follower(s)" />
-            <br/>
-            <h:form>
-                
-                <h:commandLink class="button #{userBean.checkIfFollowing(loginBean.currentUser, userBean.selectedUser) ? 'is-danger' : ''}" action="#{userBean.toggleFollow(loginBean.currentUser, userBean.selectedUser)}"
-                               rendered="#{!((userBean.selectedUser.username) eq (loginBean.getCurrentUser().username))}">
-                    <span class="icon">
-                        <i class="fas fa-bell"></i>
-                    </span>
-                    <span>
-                        <h:outputText value="#{userBean.checkIfFollowing(loginBean.currentUser, userBean.selectedUser) ? 'Unfollow' : 'Follow'}"  />
-                    </span>
-                </h:commandLink>
-            </h:form>
+                <h:outputText styleClass="title has-text-centered" value="My Account's informations" />
+                <br/>
+
+                <h:form>
+                    <div class="box user-creation-box">
+                            <br/>
+                            <h:outputText value="Username"/>
+                            <h:inputText id="username" value="#{userBean.username}" required="true" requiredMessage="Enter a valid username" styleClass="input" />
+                            <h:message for="username" styleClass="error-message" />
+
+                            <h:outputText value="First Name"/>
+                            <h:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="Enter a valid First Name" styleClass="input" />
+                            <h:message for="firstname" styleClass="error-message" />
+
+                            <h:outputText value="Last Name"/>
+                            <h:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="Enter a valid Last Name"  styleClass="input" />
+                            <h:message for="lastname" styleClass="error-message" />
+
+                            <h:outputText value="E-mail"/>
+                            <h:inputText id="email" value="#{userBean.email}" validatorMessage="This is not a valid email format." styleClass="input">
+                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+                            </h:inputText>
+                            <h:message for="email" styleClass="error-message" />
+                            
+                       
+                            <center>
+                                <h:commandButton value="Save changes" action="#{userBean.modifyAUser(loginBean.getCurrentUser())}"
+                                             styleClass="button is-primary mt-3"/>
+                            </center>
+                            
+                            
+                            
+                            
+                            <center>
+                                <h:commandButton class="delete" value="Delete account" action="#{userBean.deleteAUser()}"
+                                                 styleClass="button is-danger mt-3" onclick="return confirmDelete();"/>
+                            </center>
+                            
+                           
+                    </div>
+                    
+                </h:form>
        
    
             </center>
 
-
-            <div class="block m-3">
-                
-                
-                
-                <ui:repeat value="#{postBean.getPostsByUser(userBean.selectedUser)}" var="post">
-                    <h:form>
-                        <h:commandLink class="box mx-3" style="cursor: pointer;"
-                                       action="#{postBean.setSelectedPost(post.id)}">
-                            <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
-                            <br/>
-                            <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
-                            <br/>
-                            <h:outputText styleClass="is-size-4" value="#{post.text}" />
-                            <hr/>
-                            <center>
-                                <div class="columns">
-                                    <div class="column is-half small-padding">
-                                        <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
-                                        <span class="icon">
-                                                <i class="fas fa-heart"></i>
-                                        </span>
-                                    </div>
-                                    <div class="column is-half small-padding">
-                                        <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
-                                        <span class="icon">
-                                                <i class="fas fa-comment"></i>
-                                            </span>
-                                    </div>
-                                </div>
-                            </center>
-                        </h:commandLink>
-                    </h:form>
-                </ui:repeat>
-            </div>
             
         </div>
-        <div class="column is-one-fifth mx-3" >              
+        <div class="column is-one-fifth mx-3">  
+            <h:form enctype="multipart/form-data">
+                <!-- Your existing input fields -->
+
+                <!-- File upload field -->
+                <h:inputFile value="#{userBean.uploadedFile}" />
+
+                <!-- Submit button -->
+                <h:commandButton value="Upload" action="#{userBean.uploadProfilePicture(loginBean.currentUser)}" />
+
+                <!-- Other components -->
+            </h:form>
         </div>
 
     </div>
-
-
-
-
 
 </h:body>
 

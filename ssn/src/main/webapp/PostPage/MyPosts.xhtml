@@ -17,73 +17,75 @@
         <div class="column is-one-fifth fixed-column">
             <center>
                 <div class="image is-128x128">
-                    <img class="is-rounded" src="https://m.media-amazon.com/images/I/715W4fCS2ZL._UC256,256_CACC,256,256_.jpg" alt="User Picture"/>
+                    <img class="is-rounded" src="#{request.contextPath}/images/#{loginBean.getCurrentUser().profilePicture}" alt="User Picture" style="object-fit: cover; max-height: 128px;max-width: 128px;"/>
                 </div>
                 <h:outputText value="#{loginBean.getCurrentUser().username}" styleClass="is-size-5 m-2" />
+
                 <!-- User Buttons -->
                 <h:form>
-                    <p:button value="Home" icon="pi pi-home" styleClass="button"
-                              outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true"
-
-                    />
-                    <p:button value="Following" icon="pi pi-users" styleClass="button"
+                    <br/>
+                    <p:button value="Home" icon="pi pi-home" styleClass="button" outcome="/UserPage/UserMainPage.xhtml?faces-redirect=true" />
+                    <p:button value="Friends" icon="pi pi-users" styleClass="button"
                               outcome="/ProfilePage/FollowingPage.xhtml?faces-redirect=true"
                     />
                     <p:button value="My Posts" icon="pi pi-align-justify" styleClass="bbutton"
-                              outcome="/PostPage/MyPosts.xhtml?faces-redirect=true"/>
+                                        outcome="/PostPage/MyPosts.xhtml?faces-redirect=true" style="width:160px;"/>
                     <p:button value="Publish" icon="pi pi-pencil" styleClass="button"
-                              outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
+                                     outcome="/PostPage/CreatePostPage.xhtml?faces-redirect=true" />
                 </h:form>
                 <div class="menu-button-container">
-                    <h:form>
-                        <p:growl id="messages" showDetail="false"/>
-                        <p:commandButton id="dynaButton" value="Réglages" type="button" icon="pi pi-cog" styleClass="button"/>
-                        <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
-                            <p:submenu label="Your Profile">
-                                <p:menuitem value="View your profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
-                            </p:submenu>
-                            <p:submenu label="Logout">
-                                <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
-                            </p:submenu>
-                        </p:menu>
-                    </h:form>
-                </div>
+                <h:form>
+                    <p:growl id="messages" showDetail="false"/>
+                    <p:commandButton id="dynaButton" value="Settings" type="button" icon="pi pi-cog" styleClass="button"/>
+                    <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                        <p:submenu label="Your Profile">
+                            <p:menuitem value="My profile" action="#{userBean.goToProfilePage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
+                            <p:menuitem value="My account" action="#{userBean.goToInfoPage(loginBean.currentUser)}" update="messages" icon="pi pi-user"/>
+                        </p:submenu>
+                        <p:submenu label="Logout">
+                            <p:menuitem value="Log-out" icon="pi pi-sign-out" action="#{loginBean.userLogsout()}"/>
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </div>
             </center>
         </div>
 
 
-    <div class="column main-content">
-    <ui:repeat value="#{postBean.getPostsByUser(loginBean.currentUser)}" var="post">
-        <h:form>
-            <h:commandLink class="box mx-3" style="cursor: pointer;"
-                           action="#{postBean.setSelectedPost(post.id)}">
-                <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
-                <br/>
-                <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
-                <br/>
-                <h:outputText styleClass="is-size-4" value="#{post.text}" />
-                <hr/>
-                <center>
-                    <div class="columns">
-                        <div class="column is-half small-padding">
-                            <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
-                            <span class="icon">
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                        </div>
-                        <div class="column is-half small-padding">
-                            <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
-                            <span class="icon">
-                                                <i class="fas fa-comment"></i>
-                                            </span>
-                        </div>
-                    </div>
-                </center>
-            </h:commandLink>
-        </h:form>
-    </ui:repeat>
-
-    </div>
+        <div class="column main-content">
+            <ui:repeat value="#{postBean.getPostsByUser(loginBean.currentUser)}" var="post">
+                <h:form>
+                    <h:commandLink class="box mx-3" style="cursor: pointer;"
+                                   action="#{postBean.setSelectedPost(post.id)}">
+                        <h:outputText styleClass="is-size-5" value="#{userBean.getUserFromId(post.userId).getUsername()}" />
+                        <br/>
+                        <h:outputText styleClass="is-size-7" value="#{post.datePublished}" />
+                        <br/>
+                        <h:outputText styleClass="is-size-4" value="#{post.text}" />
+                        <hr/>
+                        <center>
+                            <div class="columns">
+                                <div class="column is-half small-padding">
+                                    <h:outputText styleClass="is-size-5" value="#{post.getLikes().size()}" />
+                                    <span class="icon">
+                                                        <i class="fas fa-heart"></i>
+                                                    </span>
+                                </div>
+                                <div class="column is-half small-padding">
+                                    <h:outputText styleClass="is-size-5" value="#{post.getComments().size()}" />
+                                    <span class="icon">
+                                                        <i class="fas fa-comment"></i>
+                                                    </span>
+                                </div>
+                            </div>
+                        </center>
+                    </h:commandLink>
+                </h:form>
+            </ui:repeat>
+        </div>
+        <div class="column is-one-fifth">
+                    
+        </div>
     </div>
 
 </h:body>

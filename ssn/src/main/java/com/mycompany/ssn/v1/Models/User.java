@@ -20,7 +20,7 @@ public class User {
     private String lastName;
     private String email;
     private int password;
-
+    private String profilePicture;
     private ArrayList<User> followers; // List of users who follow this user
 
 
@@ -47,7 +47,21 @@ public class User {
         this.password = password.hashCode(); // Hashing the password for security reasons
         this.followers = new ArrayList<>(); // Initializing the list of followers
         this.following = new ArrayList<>(); // Initializing the list of users being followed
+        this.profilePicture = "Default-PP.jpeg";
     }
+    
+    public User(int userId, String username, String firstName, String lastName, String email, String password, String profilePicture) {
+        this.userId = userId;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password.hashCode(); // Hashing the password for security reasons
+        this.followers = new ArrayList<>(); // Initializing the list of followers
+        this.following = new ArrayList<>(); // Initializing the list of users being followed
+        this.profilePicture = profilePicture;
+    }
+    
 /**
     * Gets the list of users who follow the current user.
     *
@@ -131,7 +145,15 @@ public class User {
     public String getEmail() {
         return email;
     }
-/**
+    
+    // Getter and setter for profilePicture
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    
+    
+    /**
      * Sets a new username for the user.
      *
      * @param username The new username to be set.
@@ -176,6 +198,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password.hashCode();
     }
+    
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+    
+    
 /**
      * Checks if the provided password matches the user's password.
      *

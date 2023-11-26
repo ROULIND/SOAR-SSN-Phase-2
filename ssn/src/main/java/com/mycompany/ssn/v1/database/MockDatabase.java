@@ -23,7 +23,7 @@ public class MockDatabase {
             add(new User(1,"amart", "Alice", "Martin", "alice.martin@email.com", "1234"));
             add(new User(2,"bsmit", "Bob", "Smith", "bob.smith@email.com", "1234"));
             add(new User(3,"cbrow", "Charlie", "Brown", "charlie.brown@email.com", "1234"));
-            add(new User(4,"djohn", "David", "Johnson", "david.johnson@email.com", "1234"));
+            add(new User(4,"djohn", "David", "Johnson", "david.johnson@email.com", "1234", "Sierro-PP.jpeg"));
         }
     };
     

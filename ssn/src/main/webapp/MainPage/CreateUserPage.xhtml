@@ -12,41 +12,68 @@
 
 </h:head>
 <h:body>
-    <p class="title has-text-centered m-3">Create your account</p>
-    <br/><br/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            top:-20px;
+            background-image: url("#{request.contextPath}/images/background-1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        /* Style for the return link */
+        .return-link {
+            color: white; /* default color */
+            text-decoration: none; /* optional: removes underline */
+        }
 
+        .return-link:hover {
+            color: blue; /* color on hover */
+        }
+    </style>
+    <p class="title has-text-centered" style="padding-top: 50px; color: white">Create your account</p>
+    <br/><br/>
+    
     <h:form>
         <div class="box user-creation-box">
+                <h:messages globalOnly="true" styleClass="error-message"/>
+                <br/>
                 <h:outputText value="Username"/>
                 <h:inputText id="username" value="#{userBean.username}" required="true" requiredMessage="Enter a valid username" styleClass="input" />
                 <h:message for="username" styleClass="error-message" />
-
+                <br/>
                 <h:outputText value="First Name"/>
                 <h:inputText id="firstname" value="#{userBean.firstName}" required="true" requiredMessage="Enter a valid First Name" styleClass="input" />
                 <h:message for="firstname" styleClass="error-message" />
-
+                <br/>
                 <h:outputText value="Last Name"/>
                 <h:inputText id="lastname" value="#{userBean.lastName}" required="true" requiredMessage="Enter a valid Last Name"  styleClass="input" />
                 <h:message for="lastname" styleClass="error-message" />
-
+                <br/>
                 <h:outputText value="E-mail"/>
                 <h:inputText id="email" value="#{userBean.email}" validatorMessage="This is not a valid email format." styleClass="input">
                     <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
                 </h:inputText>
                 <h:message for="email" styleClass="error-message" />
-
+                <br/>
                 <h:outputText value="Password"/>
                 <h:inputSecret id="password" value="#{userBean.password}" required="true" requiredMessage="Enter a valid password"  styleClass="input" />
                 <h:message for="password" styleClass="error-message" />
-
+                <br/>
                 <center>
                 <h:commandButton value="Create account" action="#{userBean.createAUser()}"
                                  styleClass="button is-primary mt-3"/>
                 </center>
         </div>
         <center>
-            <h:messages globalOnly="true" styleClass="error-message"/>
-            <h:link value="Back" outcome="MainPage.xhtml?faces-redirect=true" />
+            
+            <h:link value="Return to Login page" outcome="MainPage.xhtml?faces-redirect=true" styleClass="return-link"/>
         </center>
     </h:form>
 </h:body>

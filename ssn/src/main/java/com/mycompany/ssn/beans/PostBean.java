@@ -28,8 +28,10 @@ public class PostBean implements Serializable {
     private String currentPostText = "";
 
     private Post selectedPost;
-    // Liste pour stocker les publications
+    // List for storing publications
     private static List<Post> posts = new ArrayList<>(MockDatabase.getPosts());
+    
+    private String errorMessage;
 
 
     public static Post getPost(int id) {
@@ -69,30 +71,49 @@ public class PostBean implements Serializable {
     public String goToCreatePostPage() {
         return "/PostPage/CreatePostPage.xhtml?faces-redirect=true";
     }
-    // Méthode pour créer une nouvelle publication
-    public String createPost(User user) throws UserNotLoggedInException, UnauthorizedActionException, InvalidContentException {
+    // Method for creating a new publication
+    public String createPost(User user) {
         String text = this.currentPostText;
-        // Vérifier si l'utilisateur est connecté
-        if (user == null) {
-            throw new UserNotLoggedInException("User must be logged in to create a post.");
-        }
 
-        // Vérifier la validité du contenu de la publication
-        if (text == null || text.isEmpty() || text.length() > 256) {
-            throw new InvalidContentException("Invalid post content. Post must be 1-256 characters long.");
-        }
+        try {
+            // Check if user is logged in
+            if (user == null) {
+                throw new UserNotLoggedInException("User must be logged in to create a post.");
+            }
 
-        // Créer une nouvelle publication et l'ajouter à la liste des publications
-        Post post = new Post(generateUniqueId(), user.getId(), text, new Date());
-        posts.add(post);
+            // Check the validity of publication content
+            if (text == null || text.isEmpty() || text.length() > 256) {
+                throw new InvalidContentException("Invalid post content. Post must be 1-256 characters long.");
+            }
 
-        this.currentPostText = "";
+            //Line break after 150 characters
+            text = text.replaceAll("(.{150})", "$1\n");
 
-        return "/UserPage/UserMainPage.xhtml?faces-redirect=true";
+            // Create a new publication and add it to the list of publications
+            Post post = new Post(generateUniqueId(), user.getId(), text, new Date());
+            posts.add(post);
+            // Also add the new post to the MockDatabase's list of posts
+            MockDatabase.addAPost(post);
+
+            this.currentPostText = "";
+            this.errorMessage = null;  // Reset error message on success
+
+            return "/UserPage/UserMainPage.xhtml?faces-redirect=true";
+        } catch (UserNotLoggedInException | InvalidContentException e) {
+            this.errorMessage = e.getMessage();
+            return null;  // Navigation fails on error
     }
-
-    // Méthode pour obtenir la liste des publications
+}
+    
+     public String getErrorMessage() {
+        return errorMessage;
+    }
+     
+    // Method to obtain the list of publications
     public static List<Post> getPosts() {
+        // Fetch the current posts from MockDatabase
+        PostBean.posts = new ArrayList<>(MockDatabase.getPosts());
+        
         // Creating a new list from the original posts list
         List<Post> reversedPosts = new ArrayList<>(posts);
 
@@ -110,6 +131,16 @@ public class PostBean implements Serializable {
             throw new DoesNotExistException("User does not exist.");
         }
         post.addLike(user.getId());
+    }
+    
+    public void removeLike(User user, Post post) throws DoesNotExistException {
+        if (post == null) {
+            throw new DoesNotExistException("Post does not exist.");
+        }
+        if (user == null) {
+            throw new DoesNotExistException("User does not exist.");
+        }
+        post.removeLike(user.getId());
     }
 
     public boolean postIsLikedByUser(User user, Post post) throws DoesNotExistException {

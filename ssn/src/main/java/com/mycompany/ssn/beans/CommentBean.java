@@ -21,6 +21,8 @@ public class CommentBean implements Serializable {
 
     public void setCurrentCommentText(String currentCommentText) {
         this.currentCommentText = currentCommentText;
+        //Line break after 180 characters
+        this.currentCommentText = currentCommentText.replaceAll("(.{180})", "$1\n");
     }
 
     public String getCurrentCommentText() {
@@ -44,6 +46,10 @@ public class CommentBean implements Serializable {
         if (this.currentCommentText == null) {
             throw new IllegalArgumentException("Comment text cannot be empty.");
         }
+        //Verify the lengh of the comment text
+        if (this.currentCommentText == null || this.currentCommentText.length() > 256) {
+        throw new IllegalArgumentException("Comment text must be 1-256 characters long.");
+    }
         Comment comment = new Comment(post.getId(), user.getId(), this.currentCommentText);
         post.addComment(comment);
         this.currentCommentText = ""; // reset the comment handler
